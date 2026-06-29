@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAMAS — Blouse Collection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --m: #420001;
+      --ml: #6a0002;
+      --g: #e7d1a6;
+      --gd: #c9a96e;
+      --w: #ffffff;
+      --bg: #fff9f2;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; color: var(--m); background: var(--w); }
+    a { text-decoration: none; }
+
+    /* ── Announce ─── */
+    .ann {
+      background: var(--g);
+      color: var(--m);
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-bottom: 1px solid var(--gd);
+    }
+
+    /* ── NAV ─── */
+    .nav-outer {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 10px 48px;
+      background: transparent;
+      pointer-events: none;
+    }
+    .nav {
+      background: #fff;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 8px 8px 22px;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.10), 0 1px 6px rgba(0,0,0,0.06);
+      pointer-events: all;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-img {
+      width: 32px; height: 32px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid rgba(66,0,1,0.2);
+    }
+    .nav-brand { color: var(--m); font-size: 15px; font-weight: 800; letter-spacing: 3px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      color: rgba(66,0,1,0.65);
+      font-size: 10px; font-weight: 600; letter-spacing: 1.2px;
+      padding: 4px 0; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--m); }
+    .nav-icons { display: flex; align-items: center; gap: 14px; }
+    .nav-icons a { color: rgba(66,0,1,0.6); font-size: 17px; position: relative; transition: color 0.2s; }
+    .nav-icons a:hover { color: var(--m); }
+    .nav-contact {
+      background: var(--m); color: var(--g) !important;
+      padding: 9px 20px; border-radius: 100px;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      white-space: nowrap; transition: background 0.2s;
+      margin-left: 4px;
+    }
+    .nav-contact:hover { background: var(--ml) !important; }
+    .cart-badge {
+      position: absolute; top: -7px; right: -7px;
+      background: var(--m); color: var(--g);
+      width: 16px; height: 16px; border-radius: 50%;
+      font-size: 8px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── HERO SLIDER ─── */
+    .slider-wrap { position: relative; overflow: hidden; }
+    .slider-track { display: flex; transition: transform 0.65s cubic-bezier(0.4,0,0.2,1); }
+    .slide {
+      min-width: 100%;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide::before {
+      content: '';
+      position: absolute; right: -80px; top: -80px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: rgba(231,209,166,0.03);
+      border: 70px solid rgba(231,209,166,0.025);
+      pointer-events: none;
+    }
+    .slide-text { max-width: 520px; z-index: 2; }
+    .slide-eye { color: rgba(231,209,166,0.65); font-size: 10px; font-weight: 700; letter-spacing: 4px; margin-bottom: 14px; }
+    .slide-h1 { color: var(--g); font-size: 58px; font-weight: 800; line-height: 1.05; margin-bottom: 18px; }
+    .slide-h1 em { color: var(--w); font-style: normal; }
+    .slide-p { color: rgba(231,209,166,0.65); font-size: 14px; line-height: 1.85; margin-bottom: 30px; max-width: 360px; }
+    .slide-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .slide-img {
+      flex-shrink: 0; width: 320px; height: 420px;
+      border-radius: 4px; overflow: hidden; z-index: 2;
+      border: 1px solid rgba(231,209,166,0.12);
+    }
+    .slide-img img { width: 100%; height: 100%; object-fit: cover; }
+    .slide-img svg { width: 100%; height: 100%; }
+
+    /* Dots + Arrows */
+    .slider-dots {
+      position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px; z-index: 10;
+    }
+    .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(231,209,166,0.3); border: none; cursor: pointer;
+      transition: all 0.3s; padding: 0;
+    }
+    .dot.active { background: var(--g); width: 24px; border-radius: 4px; }
+    .sarrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(231,209,166,0.1); border: 1px solid rgba(231,209,166,0.2);
+      color: var(--g); font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10; transition: all 0.2s; line-height: 1;
+    }
+    .sarrow:hover { background: rgba(231,209,166,0.22); }
+    .sarrow-l { left: 20px; }
+    .sarrow-r { right: 20px; }
+
+    /* ── Buttons ─── */
+    .btn-p {
+      background: var(--g); color: var(--m); border: none;
+      padding: 13px 30px; font-size: 11px; font-weight: 800;
+      letter-spacing: 2px; cursor: pointer; font-family: 'Poppins', sans-serif;
+      border-radius: 2px; transition: background 0.2s; display: inline-block;
+    }
+    .btn-p:hover { background: var(--gd); }
+    .btn-o {
+      background: transparent; color: var(--g);
+      border: 1.5px solid var(--g); padding: 13px 30px;
+      font-size: 11px; font-weight: 600; letter-spacing: 2px;
+      cursor: pointer; font-family: 'Poppins', sans-serif;
+      border-radius: 2px; transition: all 0.2s; display: inline-block;
+    }
+    .btn-o:hover { background: var(--g); color: var(--m); }
+
+    /* ── Trust ─── */
+    .trust {
+      background: var(--bg);
+      border-top: 1px solid rgba(231,209,166,0.4);
+      border-bottom: 1px solid rgba(231,209,166,0.4);
+      padding: 0 80px;
+      display: flex; justify-content: space-around; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .trust-item { display: flex; align-items: center; gap: 12px; padding: 18px 0; }
+    .trust-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(66,0,1,0.07);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .trust-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--m); stroke-width: 1.6; }
+    .trust-title { font-size: 12px; font-weight: 700; color: var(--m); }
+    .trust-sub { font-size: 10px; color: rgba(66,0,1,0.5); }
+
+    /* ── Section ─── */
+    .sec { padding: 64px 80px; }
+    .sec-alt { background: var(--bg); }
+    .sec-hdr { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; }
+    .sec-title { font-size: 30px; font-weight: 800; color: var(--m); line-height: 1.2; }
+    .sec-title span { color: var(--gd); }
+    .sec-sub { font-size: 12px; color: rgba(66,0,1,0.5); margin-top: 5px; }
+    .view-all {
+      color: var(--m); font-size: 10px; font-weight: 800;
+      letter-spacing: 2px; border-bottom: 1.5px solid var(--m); padding-bottom: 2px;
+    }
+
+    /* ── Categories ─── */
+    .cat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .cat-card {
+      position: relative; border-radius: 4px; overflow: hidden;
+      cursor: pointer; aspect-ratio: 3/4; display: block;
+    }
+    .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .cat-card svg { width: 100%; height: 100%; display: block; transition: transform 0.5s ease; }
+    .cat-card:hover img, .cat-card:hover svg { transform: scale(1.06); }
+    .cat-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(66,0,1,0.88) 0%, rgba(66,0,1,0.05) 55%, transparent 100%);
+      display: flex; align-items: flex-end; padding: 20px 18px;
+    }
+    .cat-label { color: var(--g); font-size: 12px; font-weight: 800; letter-spacing: 2.5px; }
+    .cat-count { color: rgba(231,209,166,0.65); font-size: 10px; margin-top: 3px; }
+
+    /* ── Products ─── */
+    .prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .prod-card {
+      border: 1px solid rgba(231,209,166,0.5); border-radius: 8px;
+      overflow: hidden; background: var(--w); transition: box-shadow 0.25s;
+    }
+    .prod-card:hover { box-shadow: 0 8px 36px rgba(66,0,1,0.1); }
+    .prod-img-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; background: rgba(231,209,166,0.12); }
+    .prod-img-wrap img, .prod-img-wrap svg { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .prod-card:hover .prod-img-wrap img,
+    .prod-card:hover .prod-img-wrap svg { transform: scale(1.05); }
+    .badge {
+      position: absolute; top: 10px; left: 10px;
+      font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+      padding: 4px 10px; border-radius: 2px;
+    }
+    .badge-m { background: var(--m); color: var(--g); }
+    .badge-g { background: var(--g); color: var(--m); }
+    .wish {
+      position: absolute; top: 10px; right: 10px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.92); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+    }
+    .wish:hover { background: var(--g); }
+    .wish svg { width: 15px; height: 15px; fill: none; stroke: var(--m); stroke-width: 1.8; }
+    .prod-body { padding: 16px; }
+    .prod-name { font-size: 13px; font-weight: 700; color: var(--m); margin-bottom: 3px; }
+    .prod-type { font-size: 11px; color: rgba(66,0,1,0.45); margin-bottom: 10px; }
+    .color-dots { display: flex; gap: 6px; margin-bottom: 10px; }
+    .cdot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,0.12); cursor: pointer; }
+    .stars { color: var(--gd); font-size: 12px; margin-bottom: 10px; }
+    .rev { color: rgba(66,0,1,0.4); font-size: 10px; }
+    .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+    .price { font-size: 18px; font-weight: 800; color: var(--m); }
+    .orig { font-size: 12px; color: rgba(66,0,1,0.35); text-decoration: line-through; }
+    .disc { font-size: 10px; color: #1a8a1a; font-weight: 700; }
+    .atc {
+      width: 100%; background: var(--m); color: var(--g); border: none;
+      padding: 12px; font-size: 10px; font-weight: 800; letter-spacing: 2px;
+      cursor: pointer; font-family: 'Poppins', sans-serif; border-radius: 3px;
+      transition: background 0.2s;
+    }
+    .atc:hover { background: var(--ml); }
+
+    /* ── Brand ─── */
+    .brand-sec {
+      background: var(--m); padding: 80px;
+      display: flex; align-items: center; gap: 64px;
+    }
+    .brand-text { flex: 1; }
+    .brand-eye { color: rgba(231,209,166,0.6); font-size: 10px; font-weight: 700; letter-spacing: 4px; margin-bottom: 14px; }
+    .brand-h2 { color: var(--g); font-size: 38px; font-weight: 800; line-height: 1.2; margin-bottom: 18px; }
+    .brand-p { color: rgba(231,209,166,0.65); font-size: 14px; line-height: 1.85; margin-bottom: 32px; }
+    .brand-stats { display: flex; gap: 40px; margin-bottom: 36px; }
+    .stat-num { font-size: 36px; font-weight: 800; color: var(--g); line-height: 1; }
+    .stat-lbl { font-size: 9px; color: rgba(231,209,166,0.55); letter-spacing: 2px; margin-top: 4px; }
+    .brand-img { flex-shrink: 0; width: 340px; height: 440px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(231,209,166,0.12); }
+    .brand-img img, .brand-img svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── Tags ─── */
+    .tags {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      padding: 20px 80px; background: var(--bg);
+      border-top: 1px solid rgba(231,209,166,0.35);
+      border-bottom: 1px solid rgba(231,209,166,0.35);
+    }
+    .tag {
+      background: rgba(231,209,166,0.15); color: var(--m);
+      font-size: 10px; font-weight: 700; padding: 7px 16px;
+      border-radius: 20px; border: 1px solid rgba(231,209,166,0.55);
+      letter-spacing: 0.8px; cursor: pointer; transition: all 0.2s;
+    }
+    .tag:hover { background: var(--m); color: var(--g); }
+
+    /* ── Testimonials ─── */
+    .test-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .test-card { background: var(--w); border: 1px solid rgba(231,209,166,0.5); border-radius: 10px; padding: 24px; }
+    .test-stars { color: var(--gd); font-size: 15px; margin-bottom: 12px; }
+    .test-text { font-size: 13px; color: rgba(66,0,1,0.72); line-height: 1.75; margin-bottom: 16px; font-style: italic; }
+    .test-auth { display: flex; align-items: center; gap: 12px; }
+    .ava {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--m); color: var(--g);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; flex-shrink: 0;
+    }
+    .ava-name { font-size: 13px; font-weight: 700; color: var(--m); }
+    .ava-info { font-size: 10px; color: rgba(66,0,1,0.4); }
+
+    /* ── Newsletter ─── */
+    .nl { background: var(--g); padding: 64px 80px; text-align: center; }
+    .nl-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; color: rgba(66,0,1,0.55); margin-bottom: 10px; }
+    .nl-h3 { font-size: 34px; font-weight: 800; color: var(--m); margin-bottom: 8px; }
+    .nl-sub { font-size: 13px; color: rgba(66,0,1,0.55); margin-bottom: 30px; }
+    .nl-form { display: flex; max-width: 480px; margin: 0 auto; }
+    .nl-input {
+      flex: 1; padding: 14px 18px; border: none;
+      font-size: 13px; color: var(--m); background: var(--w);
+      font-family: 'Poppins', sans-serif; outline: none;
+    }
+    .nl-btn {
+      background: var(--m); color: var(--g); border: none;
+      padding: 14px 24px; font-size: 10px; font-weight: 800;
+      letter-spacing: 2px; cursor: pointer; font-family: 'Poppins', sans-serif;
+      transition: background 0.2s;
+    }
+    .nl-btn:hover { background: var(--ml); }
+
+    /* ── Footer ─── */
+    .footer { background: var(--m); padding: 64px 80px 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
+    .footer-logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(231,209,166,0.35); }
+    .footer-brand { font-size: 16px; font-weight: 800; color: var(--g); letter-spacing: 3px; }
+    .footer-desc { font-size: 11px; color: rgba(231,209,166,0.5); line-height: 1.8; margin-bottom: 22px; }
+    .socials { display: flex; gap: 10px; }
+    .soc {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid rgba(231,209,166,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(231,209,166,0.65); font-size: 13px; transition: all 0.2s; cursor: pointer;
+    }
+    .soc:hover { border-color: var(--g); color: var(--g); background: rgba(231,209,166,0.08); }
+    .foot-head { font-size: 10px; font-weight: 800; color: var(--g); letter-spacing: 2.5px; margin-bottom: 18px; }
+    .foot-links { display: flex; flex-direction: column; gap: 10px; }
+    .foot-links a { font-size: 11px; color: rgba(231,209,166,0.55); transition: color 0.2s; }
+    .foot-links a:hover { color: var(--g); }
+    .footer-bot {
+      border-top: 1px solid rgba(231,209,166,0.08); padding-top: 22px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .foot-copy { font-size: 10px; color: rgba(231,209,166,0.3); }
+    .foot-pay { font-size: 10px; color: rgba(231,209,166,0.3); }
+
+    /* ── Instagram Reels ─── */
+    .reels-sec { padding: 64px 80px; background: var(--w); }
+    .reels-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; }
+    .reel-card {
+      position: relative; border-radius: 14px; overflow: hidden;
+      aspect-ratio: 9/16; cursor: pointer; background: #0a0a0a;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .reel-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(66,0,1,0.2); }
+    .reel-img { width: 100%; height: 100%; display: block; }
+    .reel-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 50%);
+    }
+    .reel-play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .reel-card:hover .reel-play { transform: translate(-50%,-50%) scale(1.12); background: #fff; }
+    .reel-play svg { width: 18px; height: 18px; fill: var(--m); margin-left: 3px; }
+    .reel-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 12px 12px; }
+    .reel-handle { font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .reel-stats { display: flex; gap: 12px; }
+    .reel-stat { font-size: 10px; color: rgba(255,255,255,0.72); display: flex; align-items: center; gap: 4px; }
+    .reel-stat svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .ig-badge {
+      position: absolute; top: 10px; right: 10px;
+      width: 28px; height: 28px; border-radius: 8px;
+      background: linear-gradient(135deg, #fd5949 0%, #d6249f 50%, #285AEB 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ig-badge svg { width: 15px; height: 15px; fill: none; stroke: white; stroke-width: 1.8; }
+
+    /* ── WordPress Float ─── */
+    .wp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #21759b;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(33,117,155,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wp-float:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(33,117,155,0.6); }
+    .wp-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* ── Dark Footer ─── */
+    .dark-bottom { background: #2a0001; position: relative; overflow: hidden; }
+    .dark-nl {
+      padding: 80px 80px 64px; position: relative; z-index: 2;
+      text-align: center; border-bottom: 1px solid rgba(231,209,166,0.08);
+    }
+    .dark-brackets {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .dark-nl-eye { font-size: 10px; font-weight: 700; letter-spacing: 3.5px; color: rgba(231,209,166,0.4); margin-bottom: 18px; }
+    .dark-nl-h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 44px; font-weight: 700; color: var(--g);
+      line-height: 1.2; margin-bottom: 10px;
+    }
+    .dark-nl-h3 em { font-style: italic; color: var(--gd); }
+    .dark-nl-sub { font-size: 13px; color: rgba(231,209,166,0.45); margin-bottom: 34px; }
+    .dark-nl-form {
+      display: flex; max-width: 460px; margin: 0 auto;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(231,209,166,0.18);
+      border-radius: 100px; padding: 6px 6px 6px 22px; gap: 8px;
+    }
+    .dark-nl-input {
+      flex: 1; background: none; border: none; outline: none;
+      font-size: 13px; color: var(--g); font-family: 'Poppins', sans-serif;
+    }
+    .dark-nl-input::placeholder { color: rgba(231,209,166,0.3); }
+    .dark-nl-btn {
+      background: var(--g); color: var(--m); border: none;
+      padding: 10px 22px; border-radius: 100px;
+      font-size: 10px; font-weight: 800; letter-spacing: 2px;
+      cursor: pointer; font-family: 'Poppins', sans-serif;
+      white-space: nowrap; transition: background 0.2s;
+    }
+    .dark-nl-btn:hover { background: var(--gd); }
+    .dark-footer { padding: 52px 80px 32px; position: relative; z-index: 2; }
+    .dark-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .dark-footer-logo { display: flex; align-items: center; gap: 11px; margin-bottom: 14px; }
+    .dark-footer-logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(231,209,166,0.28); }
+    .dark-footer-brand { font-size: 16px; font-weight: 800; color: var(--g); letter-spacing: 3px; }
+    .dark-footer-desc { font-size: 11px; color: rgba(231,209,166,0.42); line-height: 1.85; margin-bottom: 20px; }
+    .dark-footer-socials { display: flex; gap: 8px; }
+    .dark-soc {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid rgba(231,209,166,0.18);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(231,209,166,0.5); transition: all 0.2s; cursor: pointer;
+    }
+    .dark-soc:hover { border-color: var(--g); color: var(--g); }
+    .dark-foot-head { font-size: 10px; font-weight: 800; color: var(--g); letter-spacing: 2.5px; margin-bottom: 16px; }
+    .dark-foot-links { display: flex; flex-direction: column; gap: 10px; }
+    .dark-foot-links a { font-size: 11px; color: rgba(231,209,166,0.48); transition: color 0.2s; }
+    .dark-foot-links a:hover { color: var(--g); }
+    .dark-footer-bot {
+      border-top: 1px solid rgba(231,209,166,0.06); padding-top: 22px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .dark-foot-copy, .dark-foot-pay { font-size: 10px; color: rgba(231,209,166,0.26); }
+
+    /* ── Responsive ─── */
+    @media (max-width: 1024px) {
+      .nav { padding: 0 40px; }
+      .slide { padding: 60px 48px; }
+      .sec { padding: 52px 48px; }
+      .brand-sec { padding: 64px 48px; flex-direction: column; }
+      .nl { padding: 52px 48px; }
+      .trust, .tags { padding: 0 48px; }
+      .footer { padding: 52px 48px 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .cat-grid { grid-template-columns: repeat(2,1fr); }
+      .prod-grid { grid-template-columns: repeat(2,1fr); }
+      .slide-h1 { font-size: 44px; }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .slide { flex-direction: column; padding: 48px 24px; min-height: auto; text-align: center; gap: 28px; }
+      .slide-btns { justify-content: center; }
+      .slide-h1 { font-size: 34px; }
+      .slide-img { width: 100%; max-width: 260px; height: 340px; }
+      .sec { padding: 44px 24px; }
+      .sec-hdr { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .brand-sec { padding: 48px 24px; gap: 32px; }
+      .brand-h2 { font-size: 28px; }
+      .brand-img { width: 100%; height: 280px; }
+      .brand-stats { gap: 24px; }
+      .test-grid { grid-template-columns: 1fr; }
+      .nl { padding: 48px 24px; }
+      .nl-form { flex-direction: column; }
+      .trust { flex-direction: column; align-items: flex-start; padding: 16px 24px; gap: 0; }
+      .tags { padding: 16px 24px; }
+      .footer { padding: 44px 24px 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .prod-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Announce -->
+<div class="ann">✦ FREE SHIPPING ABOVE ₹999 &nbsp;&nbsp;|&nbsp;&nbsp; USE CODE FIRST10 FOR 10% OFF &nbsp;&nbsp;|&nbsp;&nbsp; NEW BRIDAL COLLECTION NOW LIVE ✦</div>
+
+<!-- Navbar -->
+<nav class="nav-outer">
+  <div class="nav">
+  <div class="nav-logo">
+    <img src="assets/vamas-logo.avif" alt="Vamas Logo" class="nav-logo-img"
+         onerror="this.style.display='none'">
+    <span class="nav-brand">VAMAS</span>
+  </div>
+  <div class="nav-links">
+    <a href="#">NEW ARRIVALS</a>
+    <a href="#">COLLECTIONS</a>
+    <a href="#">OCCASION</a>
+    <a href="#">FABRIC</a>
+    <a href="#">SALE</a>
+  </div>
+  <div class="nav-icons">
+    <a href="#" title="Search">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </a>
+    <a href="#" title="Wishlist">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </a>
+    <a href="#" title="Cart" style="position:relative;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-badge">2</span>
+    </a>
+    <a href="#" class="nav-contact">Contact Us ↗</a>
+  </div>
+  </div>
+</nav>
+
+<!-- Hero Slider -->
+<div class="slider-wrap">
+  <div class="slider-track" id="track">
+
+    <!-- Slide 1 -->
+    <div class="slide" style="background:#420001;">
+      <div class="slide-text">
+        <p class="slide-eye">NEW COLLECTION 2026</p>
+        <h1 class="slide-h1">Craft Your<br><em>Perfect</em><br>Silhouette</h1>
+        <p class="slide-p">Handcrafted blouses that celebrate every occasion with elegance & timeless grace.</p>
+        <div class="slide-btns">
+          <button class="btn-p">SHOP NOW</button>
+          <button class="btn-o">VIEW LOOKBOOK</button>
+        </div>
+      </div>
+      <div class="slide-img">
+        <svg viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="320" height="420" fill="#3a0001"/>
+          <defs><pattern id="p1" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1.2" fill="rgba(231,209,166,0.12)"/><line x1="0" y1="12" x2="24" y2="12" stroke="rgba(231,209,166,0.04)" stroke-width="0.5"/><line x1="12" y1="0" x2="12" y2="24" stroke="rgba(231,209,166,0.04)" stroke-width="0.5"/></pattern></defs>
+          <rect width="320" height="420" fill="url(#p1)"/>
+          <path d="M110 60 L88 120 L80 200 L88 340 L232 340 L240 200 L232 120 L210 60 Z" fill="rgba(231,209,166,0.08)" stroke="rgba(231,209,166,0.3)" stroke-width="1.5"/>
+          <path d="M130 60 Q160 90 190 60" fill="none" stroke="rgba(231,209,166,0.5)" stroke-width="2"/>
+          <path d="M88 340 Q160 360 232 340" stroke="#e7d1a6" stroke-width="2.5" fill="none" opacity="0.7"/>
+          <path d="M91 330 Q160 350 229 330" stroke="#e7d1a6" stroke-width="1.2" fill="none" opacity="0.4"/>
+          <g opacity="0.65">
+            <circle cx="130" cy="190" r="14" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="130" cy="190" r="6" fill="rgba(231,209,166,0.45)"/>
+            <circle cx="160" cy="178" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="160" cy="178" r="5" fill="rgba(231,209,166,0.45)"/>
+            <circle cx="190" cy="190" r="14" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="190" cy="190" r="6" fill="rgba(231,209,166,0.45)"/>
+            <circle cx="146" cy="218" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="146" cy="218" r="5" fill="rgba(231,209,166,0.45)"/>
+            <circle cx="174" cy="215" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="174" cy="215" r="5" fill="rgba(231,209,166,0.45)"/>
+          </g>
+          <text x="160" y="390" font-family="Poppins,sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="rgba(231,209,166,0.45)" letter-spacing="2">SILK ZARI · MIRROR WORK</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" style="background:#1a0a00;">
+      <div class="slide-text">
+        <p class="slide-eye">BRIDAL COLLECTION</p>
+        <h1 class="slide-h1">Elegance<br>Woven in<br><em>Every Thread</em></h1>
+        <p class="slide-p">Premium silk and velvet blouses crafted for your most precious moments and celebrations.</p>
+        <div class="slide-btns">
+          <button class="btn-p">BRIDAL EDIT</button>
+          <button class="btn-o">EXPLORE MORE</button>
+        </div>
+      </div>
+      <div class="slide-img">
+        <svg viewBox="0 0 320 420" fill="none" preserveAspectRatio="xMidYMid slice">
+          <rect width="320" height="420" fill="#15070a"/>
+          <defs><pattern id="p2" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M11 2L13.2 8.6H20L14.4 12.6L16.6 19.2L11 15.2L5.4 19.2L7.6 12.6L2 8.6H8.8Z" fill="rgba(231,209,166,0.06)"/></pattern></defs>
+          <rect width="320" height="420" fill="url(#p2)"/>
+          <path d="M108 58 L86 118 L78 198 L86 338 L234 338 L242 198 L234 118 L212 58 Z" fill="rgba(100,10,20,0.35)" stroke="rgba(231,209,166,0.4)" stroke-width="1.5"/>
+          <path d="M128 58 Q160 88 192 58" fill="none" stroke="rgba(231,209,166,0.6)" stroke-width="2"/>
+          <path d="M86 338 Q160 358 234 338" stroke="#e7d1a6" stroke-width="2.5" fill="none" opacity="0.7"/>
+          <g opacity="0.6">
+            <circle cx="160" cy="185" r="22" fill="none" stroke="#e7d1a6" stroke-width="1.5"/>
+            <circle cx="160" cy="185" r="14" fill="none" stroke="rgba(231,209,166,0.5)" stroke-width="1"/>
+            <circle cx="160" cy="185" r="7" fill="rgba(231,209,166,0.3)"/>
+            <circle cx="160" cy="163" r="4" fill="rgba(231,209,166,0.3)"/>
+            <circle cx="182" cy="185" r="4" fill="rgba(231,209,166,0.3)"/>
+            <circle cx="160" cy="207" r="4" fill="rgba(231,209,166,0.3)"/>
+            <circle cx="138" cy="185" r="4" fill="rgba(231,209,166,0.3)"/>
+            <circle cx="175" cy="170" r="3" fill="rgba(231,209,166,0.3)"/>
+            <circle cx="175" cy="200" r="3" fill="rgba(231,209,166,0.3)"/>
+            <circle cx="145" cy="170" r="3" fill="rgba(231,209,166,0.3)"/>
+            <circle cx="145" cy="200" r="3" fill="rgba(231,209,166,0.3)"/>
+          </g>
+          <text x="160" y="390" font-family="Poppins,sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="rgba(231,209,166,0.45)" letter-spacing="2">BRIDAL VELVET SPECIAL</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" style="background:#2d0001;">
+      <div class="slide-text">
+        <p class="slide-eye">FESTIVE SEASON EDIT</p>
+        <h1 class="slide-h1">Celebrate in<br><em>Colour</em><br>& Style</h1>
+        <p class="slide-p">Vibrant festive blouses with traditional embroidery to make every celebration unforgettable.</p>
+        <div class="slide-btns">
+          <button class="btn-p">SHOP FESTIVE</button>
+          <button class="btn-o">VIEW OFFERS</button>
+        </div>
+      </div>
+      <div class="slide-img">
+        <svg viewBox="0 0 320 420" fill="none" preserveAspectRatio="xMidYMid slice">
+          <rect width="320" height="420" fill="#280000"/>
+          <defs><pattern id="p3" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="28" y2="28" stroke="rgba(231,209,166,0.06)" stroke-width="0.8"/><line x1="28" y1="0" x2="0" y2="28" stroke="rgba(231,209,166,0.06)" stroke-width="0.8"/></pattern></defs>
+          <rect width="320" height="420" fill="url(#p3)"/>
+          <path d="M110 60 L88 120 L80 200 L88 340 L232 340 L240 200 L232 120 L210 60 Z" fill="rgba(200,50,50,0.1)" stroke="rgba(231,209,166,0.35)" stroke-width="1.5"/>
+          <path d="M130 60 Q160 90 190 60" fill="none" stroke="rgba(231,209,166,0.5)" stroke-width="2"/>
+          <path d="M88 340 Q160 360 232 340" stroke="#e7d1a6" stroke-width="2.5" fill="none" opacity="0.7"/>
+          <g opacity="0.65">
+            <circle cx="122" cy="175" r="7" fill="#e7d1a650"/><circle cx="140" cy="162" r="5" fill="#e7d1a640"/>
+            <circle cx="160" cy="178" r="8" fill="#e7d1a660"/><circle cx="178" cy="164" r="5" fill="#e7d1a640"/>
+            <circle cx="196" cy="176" r="7" fill="#e7d1a650"/><circle cx="132" cy="200" r="5" fill="#e7d1a640"/>
+            <circle cx="150" cy="208" r="7" fill="#e7d1a650"/><circle cx="170" cy="205" r="5" fill="#e7d1a640"/>
+            <circle cx="188" cy="198" r="7" fill="#e7d1a650"/>
+            <circle cx="131" cy="188" r="3" fill="#e7d1a6"/><circle cx="146" cy="183" r="2.5" fill="#e7d1a6"/>
+            <circle cx="165" cy="192" r="3" fill="#e7d1a6"/><circle cx="180" cy="186" r="2.5" fill="#e7d1a6"/>
+          </g>
+          <text x="160" y="390" font-family="Poppins,sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="rgba(231,209,166,0.45)" letter-spacing="2">PHULKARI FESTIVE EDIT</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <button class="sarrow sarrow-l" id="prev">&#8592;</button>
+  <button class="sarrow sarrow-r" id="next">&#8594;</button>
+  <div class="slider-dots">
+    <button class="dot active" data-i="0"></button>
+    <button class="dot" data-i="1"></button>
+    <button class="dot" data-i="2"></button>
+  </div>
+</div>
+
+<!-- Trust Bar -->
+<div class="trust">
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <div><div class="trust-title">100% Authentic</div><div class="trust-sub">Genuine handcrafted fabric</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+    <div><div class="trust-title">Fast Delivery</div><div class="trust-sub">3–5 business days</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg></div>
+    <div><div class="trust-title">Easy Returns</div><div class="trust-sub">7-day hassle-free</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+    <div><div class="trust-title">Secure Payment</div><div class="trust-sub">UPI · Card · COD</div></div>
+  </div>
+</div>
+
+<!-- Shop by Occasion -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div><div class="sec-title">Shop by <span>Occasion</span></div><div class="sec-sub">Find the perfect blouse for every moment</div></div>
+    <a href="#" class="view-all">VIEW ALL</a>
+  </div>
+  <div class="cat-grid">
+    <a href="#" class="cat-card">
+      <svg viewBox="0 0 200 267" preserveAspectRatio="xMidYMid slice"><rect width="200" height="267" fill="#2d0001"/><defs><pattern id="cp1" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.2" fill="rgba(231,209,166,0.14)"/></pattern></defs><rect width="200" height="267" fill="url(#cp1)"/><path d="M65 38 L50 82 L45 148 L50 218 L150 218 L155 148 L150 82 L135 38 Z" fill="rgba(231,209,166,0.08)" stroke="rgba(231,209,166,0.45)" stroke-width="1.5"/><path d="M80 38 Q100 60 120 38" fill="none" stroke="rgba(231,209,166,0.65)" stroke-width="1.5"/><circle cx="100" cy="128" r="20" fill="none" stroke="rgba(231,209,166,0.45)" stroke-width="1.5"/><circle cx="100" cy="128" r="9" fill="rgba(231,209,166,0.2)"/><path d="M50 218 Q100 234 150 218" stroke="#e7d1a6" stroke-width="2" fill="none" opacity="0.7"/></svg>
+      <div class="cat-overlay"><div><div class="cat-label">BRIDAL</div><div class="cat-count">120+ styles</div></div></div>
+    </a>
+    <a href="#" class="cat-card">
+      <svg viewBox="0 0 200 267" preserveAspectRatio="xMidYMid slice"><rect width="200" height="267" fill="#420001"/><defs><pattern id="cp2" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M8 2L9.5 6.5H14L10.3 9.2L11.8 13.7L8 11L4.2 13.7L5.7 9.2L2 6.5H6.5Z" fill="rgba(231,209,166,0.1)"/></pattern></defs><rect width="200" height="267" fill="url(#cp2)"/><path d="M65 38 L50 82 L45 148 L50 218 L150 218 L155 148 L150 82 L135 38 Z" fill="rgba(231,209,166,0.07)" stroke="rgba(231,209,166,0.5)" stroke-width="1.5"/><path d="M80 38 Q100 58 120 38" fill="none" stroke="rgba(231,209,166,0.65)" stroke-width="1.5"/><circle cx="90" cy="120" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.2"/><circle cx="90" cy="120" r="5" fill="rgba(231,209,166,0.3)"/><circle cx="112" cy="114" r="10" fill="none" stroke="#e7d1a6" stroke-width="1.2"/><circle cx="112" cy="114" r="4" fill="rgba(231,209,166,0.3)"/><circle cx="100" cy="138" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.2"/><circle cx="100" cy="138" r="5" fill="rgba(231,209,166,0.3)"/><path d="M50 218 Q100 232 150 218" stroke="#e7d1a6" stroke-width="2" fill="none" opacity="0.7"/></svg>
+      <div class="cat-overlay"><div><div class="cat-label">FESTIVE</div><div class="cat-count">90+ styles</div></div></div>
+    </a>
+    <a href="#" class="cat-card">
+      <svg viewBox="0 0 200 267" preserveAspectRatio="xMidYMid slice"><rect width="200" height="267" fill="#c9a96e"/><defs><pattern id="cp3" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="22" y2="22" stroke="rgba(66,0,1,0.07)" stroke-width="0.8"/><line x1="22" y1="0" x2="0" y2="22" stroke="rgba(66,0,1,0.07)" stroke-width="0.8"/></pattern></defs><rect width="200" height="267" fill="url(#cp3)"/><path d="M65 38 L50 82 L45 148 L50 218 L150 218 L155 148 L150 82 L135 38 Z" fill="rgba(66,0,1,0.08)" stroke="rgba(66,0,1,0.35)" stroke-width="1.5"/><path d="M80 38 Q100 56 120 38" fill="none" stroke="rgba(66,0,1,0.45)" stroke-width="1.5"/><line x1="60" y1="108" x2="140" y2="108" stroke="rgba(66,0,1,0.2)" stroke-width="1"/><line x1="60" y1="128" x2="140" y2="128" stroke="rgba(66,0,1,0.2)" stroke-width="1"/><line x1="60" y1="148" x2="140" y2="148" stroke="rgba(66,0,1,0.2)" stroke-width="1"/><path d="M50 218 Q100 232 150 218" stroke="rgba(66,0,1,0.5)" stroke-width="2" fill="none"/></svg>
+      <div class="cat-overlay" style="background:linear-gradient(to top,rgba(66,0,1,0.9) 0%,rgba(66,0,1,0.08) 55%,transparent 100%)"><div><div class="cat-label">CASUAL</div><div class="cat-count">200+ styles</div></div></div>
+    </a>
+    <a href="#" class="cat-card">
+      <svg viewBox="0 0 200 267" preserveAspectRatio="xMidYMid slice"><rect width="200" height="267" fill="#1a0a00"/><defs><pattern id="cp4" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse"><rect x="7" y="7" width="4" height="4" fill="rgba(231,209,166,0.12)" rx="0.5"/></pattern></defs><rect width="200" height="267" fill="url(#cp4)"/><path d="M65 38 L50 82 L45 148 L50 218 L150 218 L155 148 L150 82 L135 38 Z" fill="rgba(231,209,166,0.07)" stroke="rgba(231,209,166,0.42)" stroke-width="1.5"/><path d="M80 38 Q100 58 120 38" fill="none" stroke="rgba(231,209,166,0.6)" stroke-width="1.5"/><g opacity="0.65"><rect x="80" y="104" width="7" height="7" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="96" y="108" width="7" height="7" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="112" y="103" width="7" height="7" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="80" y="120" width="7" height="7" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="96" y="122" width="7" height="7" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="112" y="118" width="7" height="7" fill="#e7d1a6" rx="0.5" opacity="0.5"/></g><path d="M50 218 Q100 232 150 218" stroke="#e7d1a6" stroke-width="2" fill="none" opacity="0.7"/></svg>
+      <div class="cat-overlay"><div><div class="cat-label">PARTY WEAR</div><div class="cat-count">80+ styles</div></div></div>
+    </a>
+  </div>
+</div>
+
+<!-- New Arrivals -->
+<div class="sec sec-alt">
+  <div class="sec-hdr">
+    <div><div class="sec-title">New <span>Arrivals</span></div><div class="sec-sub">Fresh styles added every week</div></div>
+    <a href="#" class="view-all">VIEW ALL</a>
+  </div>
+  <div class="prod-grid">
+
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <svg viewBox="0 0 240 320" preserveAspectRatio="xMidYMid slice"><rect width="240" height="320" fill="#f5ede0"/><path d="M72 50 L55 98 L48 170 L55 268 L185 268 L192 170 L185 98 L168 50 Z" fill="#420001" opacity="0.85"/><path d="M92 50 Q120 76 148 50" fill="none" stroke="#420001" stroke-width="2"/><path d="M55 268 Q120 286 185 268" stroke="#e7d1a6" stroke-width="3" fill="none" opacity="0.9"/><path d="M58 260 Q120 276 182 260" stroke="#e7d1a6" stroke-width="1.5" fill="none" opacity="0.55"/><g opacity="0.7"><circle cx="96" cy="158" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="96" cy="158" r="5" fill="rgba(231,209,166,0.55)"/><circle cx="122" cy="148" r="11" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="122" cy="148" r="4.5" fill="rgba(231,209,166,0.55)"/><circle cx="148" cy="158" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="148" cy="158" r="5" fill="rgba(231,209,166,0.55)"/><circle cx="110" cy="182" r="10" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="110" cy="182" r="4" fill="rgba(231,209,166,0.55)"/><circle cx="134" cy="180" r="10" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="134" cy="180" r="4" fill="rgba(231,209,166,0.55)"/></g></svg>
+        <span class="badge badge-m">NEW</span>
+        <button class="wish"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Silk Zari Mirror Blouse</div>
+        <div class="prod-type">Banarasi Silk · Mirror Work</div>
+        <div class="color-dots"><div class="cdot" style="background:#420001;"></div><div class="cdot" style="background:#e7d1a6;"></div><div class="cdot" style="background:#1a1a2e;"></div><div class="cdot" style="background:#006400;"></div></div>
+        <div class="stars">★★★★★ <span class="rev">(24 reviews)</span></div>
+        <div class="price-row"><span class="price">₹1,299</span><span class="orig">₹1,999</span><span class="disc">35% off</span></div>
+        <button class="atc">ADD TO CART</button>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <svg viewBox="0 0 240 320" preserveAspectRatio="xMidYMid slice"><rect width="240" height="320" fill="#ede0c8"/><path d="M70 50 L53 98 L46 170 L53 268 L187 268 L194 170 L187 98 L170 50 Z" fill="#8b4513" opacity="0.7"/><path d="M90 50 Q120 76 150 50" fill="none" stroke="#8b4513" stroke-width="2"/><defs><pattern id="pp1" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M6 1L7.4 5H11.5L8.2 7.2L9.4 11L6 8.8L2.6 11L3.8 7.2L0.5 5H4.6Z" fill="rgba(231,209,166,0.35)"/></pattern></defs><path d="M70 50 L53 98 L46 170 L53 268 L187 268 L194 170 L187 98 L170 50 Z" fill="url(#pp1)"/><path d="M53 268 Q120 286 187 268" stroke="#420001" stroke-width="2.5" fill="none" opacity="0.8"/><g opacity="0.65"><rect x="82" y="112" width="9" height="9" fill="#420001" rx="1"/><rect x="101" y="106" width="9" height="9" fill="#420001" rx="1"/><rect x="120" y="113" width="9" height="9" fill="#420001" rx="1"/><rect x="139" y="107" width="9" height="9" fill="#420001" rx="1"/><rect x="157" y="113" width="9" height="9" fill="#420001" rx="1"/></g></svg>
+        <span class="badge badge-g">HOT</span>
+        <button class="wish"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Phulkari Embroidery Blouse</div>
+        <div class="prod-type">Cotton · Punjabi Phulkari Work</div>
+        <div class="color-dots"><div class="cdot" style="background:#e7d1a6;"></div><div class="cdot" style="background:#ff9933;"></div><div class="cdot" style="background:#420001;"></div></div>
+        <div class="stars">★★★★☆ <span class="rev">(18 reviews)</span></div>
+        <div class="price-row"><span class="price">₹1,499</span><span class="orig">₹2,199</span><span class="disc">32% off</span></div>
+        <button class="atc">ADD TO CART</button>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <svg viewBox="0 0 240 320" preserveAspectRatio="xMidYMid slice"><rect width="240" height="320" fill="#1a0001"/><defs><pattern id="pp2" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="9" cy="9" r="1.5" fill="rgba(231,209,166,0.18)"/></pattern></defs><rect width="240" height="320" fill="url(#pp2)"/><path d="M72 50 L55 98 L48 170 L55 268 L185 268 L192 170 L185 98 L168 50 Z" fill="rgba(60,0,1,0.7)" stroke="rgba(231,209,166,0.3)" stroke-width="1.5"/><path d="M92 50 Q120 76 148 50" fill="none" stroke="rgba(231,209,166,0.55)" stroke-width="2"/><path d="M58 268 Q120 286 182 268" stroke="#e7d1a6" stroke-width="2.5" fill="none" opacity="0.75"/><g opacity="0.65"><rect x="82" y="122" width="76" height="3" fill="#e7d1a6" rx="1"/><rect x="86" y="130" width="68" height="2" fill="#e7d1a6" rx="1" opacity="0.55"/><circle cx="120" cy="158" r="18" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="120" cy="158" r="8" fill="rgba(231,209,166,0.3)"/><circle cx="102" cy="158" r="3.5" fill="rgba(231,209,166,0.45)"/><circle cx="138" cy="158" r="3.5" fill="rgba(231,209,166,0.45)"/><circle cx="120" cy="140" r="3.5" fill="rgba(231,209,166,0.45)"/><circle cx="120" cy="176" r="3.5" fill="rgba(231,209,166,0.45)"/></g></svg>
+        <span class="badge badge-m">SALE</span>
+        <button class="wish"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Velvet Zardozi Blouse</div>
+        <div class="prod-type">Premium Velvet · Zardozi Work</div>
+        <div class="color-dots"><div class="cdot" style="background:#800020;"></div><div class="cdot" style="background:#1a1a2e;"></div><div class="cdot" style="background:#006400;"></div></div>
+        <div class="stars">★★★★★ <span class="rev">(41 reviews)</span></div>
+        <div class="price-row"><span class="price">₹1,099</span><span class="orig">₹1,799</span><span class="disc">39% off</span></div>
+        <button class="atc">ADD TO CART</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Brand Story -->
+<div class="brand-sec">
+  <div class="brand-text">
+    <div class="brand-eye">OUR STORY</div>
+    <div class="brand-h2">Woven with Love,<br>Crafted with Precision</div>
+    <div class="brand-p">Each blouse is handcrafted by skilled artisans using premium fabrics sourced across India. From bridal zari to everyday cotton, we celebrate the art of Indian craftsmanship — one thread at a time.</div>
+    <div class="brand-stats">
+      <div><div class="stat-num">500+</div><div class="stat-lbl">DESIGNS</div></div>
+      <div><div class="stat-num">10K+</div><div class="stat-lbl">CUSTOMERS</div></div>
+      <div><div class="stat-num">4.9★</div><div class="stat-lbl">RATING</div></div>
+    </div>
+    <button class="btn-o">EXPLORE OUR STORY</button>
+  </div>
+  <div class="brand-img">
+    <svg viewBox="0 0 340 440" fill="none" preserveAspectRatio="xMidYMid slice"><rect width="340" height="440" fill="#350001"/><defs><pattern id="bp" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M14 3L16.5 10H24L18 13.8L20.5 21L14 17L7.5 21L10 13.8L4 10H11.5Z" fill="rgba(231,209,166,0.06)"/></pattern></defs><rect width="340" height="440" fill="url(#bp)"/><circle cx="170" cy="220" r="80" fill="none" stroke="rgba(231,209,166,0.15)" stroke-width="1.5"/><circle cx="170" cy="220" r="56" fill="none" stroke="rgba(231,209,166,0.2)" stroke-width="1.5"/><circle cx="170" cy="220" r="32" fill="rgba(231,209,166,0.06)" stroke="rgba(231,209,166,0.35)" stroke-width="1.5"/><circle cx="170" cy="220" r="12" fill="rgba(231,209,166,0.22)"/><g opacity="0.45"><ellipse cx="170" cy="188" rx="7" ry="14" fill="rgba(231,209,166,0.35)"/><ellipse cx="170" cy="252" rx="7" ry="14" fill="rgba(231,209,166,0.35)"/><ellipse cx="138" cy="220" rx="14" ry="7" fill="rgba(231,209,166,0.35)"/><ellipse cx="202" cy="220" rx="14" ry="7" fill="rgba(231,209,166,0.35)"/><ellipse cx="148" cy="198" rx="7" ry="14" transform="rotate(-45 148 198)" fill="rgba(231,209,166,0.25)"/><ellipse cx="192" cy="198" rx="7" ry="14" transform="rotate(45 192 198)" fill="rgba(231,209,166,0.25)"/><ellipse cx="148" cy="242" rx="7" ry="14" transform="rotate(45 148 242)" fill="rgba(231,209,166,0.25)"/><ellipse cx="192" cy="242" rx="7" ry="14" transform="rotate(-45 192 242)" fill="rgba(231,209,166,0.25)"/></g><path d="M100 380 Q170 400 240 380" stroke="#e7d1a6" stroke-width="2" fill="none" opacity="0.6"/><text x="170" y="418" font-family="Poppins,sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="rgba(231,209,166,0.4)" letter-spacing="2">HANDCRAFTED WITH LOVE</text></svg>
+  </div>
+</div>
+
+<!-- Best Sellers -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div><div class="sec-title">Best <span>Sellers</span></div><div class="sec-sub">Most loved by our customers</div></div>
+    <a href="#" class="view-all">VIEW ALL</a>
+  </div>
+  <div class="prod-grid">
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <svg viewBox="0 0 240 320" preserveAspectRatio="xMidYMid slice"><rect width="240" height="320" fill="#e8d5b0"/><defs><pattern id="bs1" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="2" fill="rgba(66,0,1,0.1)"/></pattern></defs><rect width="240" height="320" fill="url(#bs1)"/><path d="M72 52 L55 100 L48 172 L55 268 L185 268 L192 172 L185 100 L168 52 Z" fill="#5d1a00" opacity="0.82"/><path d="M92 52 Q120 78 148 52" fill="none" stroke="#5d1a00" stroke-width="2"/><path d="M55 268 Q120 286 185 268" stroke="#e7d1a6" stroke-width="3" fill="none" opacity="0.85"/><path d="M58 260 Q120 276 182 260" stroke="#e7d1a6" stroke-width="1.5" fill="none" opacity="0.5"/><g opacity="0.65"><circle cx="100" cy="152" r="14" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="100" cy="152" r="6" fill="rgba(231,209,166,0.5)"/><circle cx="130" cy="143" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="130" cy="143" r="5" fill="rgba(231,209,166,0.5)"/><circle cx="158" cy="152" r="14" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="158" cy="152" r="6" fill="rgba(231,209,166,0.5)"/><circle cx="116" cy="178" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="116" cy="178" r="5" fill="rgba(231,209,166,0.5)"/><circle cx="143" cy="175" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.5"/><circle cx="143" cy="175" r="5" fill="rgba(231,209,166,0.5)"/></g></svg>
+        <span class="badge badge-g">BESTSELLER</span>
+        <button class="wish"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Kanjeevaram Cut Blouse</div>
+        <div class="prod-type">Pure Silk · Traditional Weave</div>
+        <div class="color-dots"><div class="cdot" style="background:#420001;"></div><div class="cdot" style="background:#006400;"></div><div class="cdot" style="background:#1a1a2e;"></div></div>
+        <div class="stars">★★★★★ <span class="rev">(62 reviews)</span></div>
+        <div class="price-row"><span class="price">₹2,199</span><span class="orig">₹2,999</span><span class="disc">27% off</span></div>
+        <button class="atc">ADD TO CART</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <svg viewBox="0 0 240 320" preserveAspectRatio="xMidYMid slice"><rect width="240" height="320" fill="#fff8f0"/><path d="M72 52 L55 100 L48 172 L55 268 L185 268 L192 172 L185 100 L168 52 Z" fill="#e7d1a6" opacity="0.9" stroke="#c9a96e" stroke-width="1.5"/><path d="M92 52 Q120 78 148 52" fill="none" stroke="#c9a96e" stroke-width="2"/><defs><pattern id="bs2" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M5 0L6.2 3.8H10L7 6.2L8.2 10L5 7.8L1.8 10L3 6.2L0 3.8H3.8Z" fill="rgba(66,0,1,0.14)"/></pattern></defs><path d="M72 52 L55 100 L48 172 L55 268 L185 268 L192 172 L185 100 L168 52 Z" fill="url(#bs2)"/><path d="M55 268 Q120 286 185 268" stroke="#420001" stroke-width="2.5" fill="none" opacity="0.7"/><rect x="80" y="112" width="80" height="2.5" fill="rgba(66,0,1,0.3)" rx="1"/><rect x="84" y="121" width="72" height="2" fill="rgba(66,0,1,0.2)" rx="1"/><rect x="80" y="144" width="80" height="2.5" fill="rgba(66,0,1,0.3)" rx="1"/><rect x="84" y="153" width="72" height="2" fill="rgba(66,0,1,0.2)" rx="1"/></svg>
+        <span class="badge badge-m">LIMITED</span>
+        <button class="wish"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Chikankari Lucknowi</div>
+        <div class="prod-type">Georgette · Hand Embroidery</div>
+        <div class="color-dots"><div class="cdot" style="background:#fff;border-color:#ccc;"></div><div class="cdot" style="background:#e7d1a6;"></div><div class="cdot" style="background:#ffc0cb;"></div></div>
+        <div class="stars">★★★★★ <span class="rev">(57 reviews)</span></div>
+        <div class="price-row"><span class="price">₹1,399</span><span class="orig">₹1,899</span><span class="disc">26% off</span></div>
+        <button class="atc">ADD TO CART</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <svg viewBox="0 0 240 320" preserveAspectRatio="xMidYMid slice"><rect width="240" height="320" fill="#f0e8d5"/><defs><pattern id="bs3" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse"><rect x="6" y="6" width="4" height="4" fill="rgba(66,0,1,0.1)" rx="0.5"/><line x1="0" y1="0" x2="16" y2="16" stroke="rgba(66,0,1,0.04)" stroke-width="0.5"/></pattern></defs><path d="M72 50 L55 98 L48 170 L55 266 L185 266 L192 170 L185 98 L168 50 Z" fill="#8b0000" opacity="0.82"/><rect width="240" height="320" fill="url(#bs3)"/><path d="M92 50 Q120 76 148 50" fill="none" stroke="#8b0000" stroke-width="2"/><path d="M58 266 Q120 284 182 266" stroke="#e7d1a6" stroke-width="3" fill="none" opacity="0.8"/><g opacity="0.6"><rect x="78" y="120" width="11" height="11" fill="#e7d1a6" rx="1"/><rect x="98" y="114" width="11" height="11" fill="#e7d1a6" rx="1"/><rect x="116" y="122" width="11" height="11" fill="#e7d1a6" rx="1"/><rect x="134" y="115" width="11" height="11" fill="#e7d1a6" rx="1"/><rect x="152" y="121" width="11" height="11" fill="#e7d1a6" rx="1"/><rect x="82" y="140" width="9" height="9" fill="#e7d1a6" rx="1"/><rect x="100" y="144" width="9" height="9" fill="#e7d1a6" rx="1"/><rect x="118" y="139" width="9" height="9" fill="#e7d1a6" rx="1"/><rect x="136" y="143" width="9" height="9" fill="#e7d1a6" rx="1"/><rect x="154" y="138" width="9" height="9" fill="#e7d1a6" rx="1"/></g></svg>
+        <button class="wish"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Gota Patti Blouse</div>
+        <div class="prod-type">Pure Silk · Rajasthani Work</div>
+        <div class="color-dots"><div class="cdot" style="background:#8b0000;"></div><div class="cdot" style="background:#e7d1a6;"></div><div class="cdot" style="background:#00008b;"></div></div>
+        <div class="stars">★★★★★ <span class="rev">(33 reviews)</span></div>
+        <div class="price-row"><span class="price">₹1,749</span><span class="orig">₹2,499</span><span class="disc">30% off</span></div>
+        <button class="atc">ADD TO CART</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Instagram Reels -->
+<div class="reels-sec">
+  <div class="sec-hdr">
+    <div><div class="sec-title">As Seen on <span>Instagram</span></div><div class="sec-sub">Follow @vamas.official for daily style inspiration</div></div>
+    <a href="#" class="view-all" style="display:flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>FOLLOW US</a>
+  </div>
+  <div class="reels-grid">
+
+    <div class="reel-card">
+      <svg class="reel-img" viewBox="0 0 200 355" fill="none" preserveAspectRatio="xMidYMid slice"><rect width="200" height="355" fill="#420001"/><defs><pattern id="r1" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1.2" fill="rgba(231,209,166,0.1)"/></pattern></defs><rect width="200" height="355" fill="url(#r1)"/><path d="M70 60 L55 110 L50 185 L55 285 L145 285 L150 185 L145 110 L130 60 Z" fill="rgba(231,209,166,0.07)" stroke="rgba(231,209,166,0.35)" stroke-width="1.5"/><path d="M85 60 Q100 80 115 60" fill="none" stroke="rgba(231,209,166,0.55)" stroke-width="1.5"/><circle cx="100" cy="175" r="22" fill="none" stroke="#e7d1a6" stroke-width="1.5" opacity="0.6"/><circle cx="100" cy="175" r="10" fill="rgba(231,209,166,0.3)"/><circle cx="100" cy="153" r="5" fill="rgba(231,209,166,0.28)"/><circle cx="122" cy="175" r="5" fill="rgba(231,209,166,0.28)"/><circle cx="100" cy="197" r="5" fill="rgba(231,209,166,0.28)"/><circle cx="78" cy="175" r="5" fill="rgba(231,209,166,0.28)"/><text x="100" y="328" font-family="sans-serif" font-size="9" text-anchor="middle" fill="rgba(231,209,166,0.38)" letter-spacing="1.5">SILK ZARI · VAMAS</text></svg>
+      <div class="reel-overlay"></div>
+      <div class="ig-badge"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+      <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="reel-info">
+        <div class="reel-handle">@vamas.official</div>
+        <div class="reel-stats">
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>2.4k</div>
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>18k</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <svg class="reel-img" viewBox="0 0 200 355" fill="none" preserveAspectRatio="xMidYMid slice"><rect width="200" height="355" fill="#15070a"/><defs><pattern id="r2" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M11 2L13.2 8.6H20L14.4 12.6L16.6 19.2L11 15.2L5.4 19.2L7.6 12.6L2 8.6H8.8Z" fill="rgba(231,209,166,0.07)"/></pattern></defs><rect width="200" height="355" fill="url(#r2)"/><path d="M70 60 L55 110 L50 185 L55 285 L145 285 L150 185 L145 110 L130 60 Z" fill="rgba(100,10,20,0.4)" stroke="rgba(231,209,166,0.4)" stroke-width="1.5"/><path d="M85 60 Q100 80 115 60" fill="none" stroke="rgba(231,209,166,0.6)" stroke-width="1.5"/><g opacity="0.62"><circle cx="82" cy="158" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.2"/><circle cx="82" cy="158" r="5" fill="rgba(231,209,166,0.4)"/><circle cx="100" cy="145" r="10" fill="none" stroke="#e7d1a6" stroke-width="1.2"/><circle cx="100" cy="145" r="4" fill="rgba(231,209,166,0.4)"/><circle cx="118" cy="158" r="12" fill="none" stroke="#e7d1a6" stroke-width="1.2"/><circle cx="118" cy="158" r="5" fill="rgba(231,209,166,0.4)"/><circle cx="90" cy="178" r="10" fill="none" stroke="#e7d1a6" stroke-width="1.2"/><circle cx="90" cy="178" r="4" fill="rgba(231,209,166,0.4)"/><circle cx="110" cy="175" r="10" fill="none" stroke="#e7d1a6" stroke-width="1.2"/><circle cx="110" cy="175" r="4" fill="rgba(231,209,166,0.4)"/></g><text x="100" y="328" font-family="sans-serif" font-size="9" text-anchor="middle" fill="rgba(231,209,166,0.38)" letter-spacing="1.5">BRIDAL VELVET · VAMAS</text></svg>
+      <div class="reel-overlay"></div>
+      <div class="ig-badge"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+      <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="reel-info">
+        <div class="reel-handle">@vamas.official</div>
+        <div class="reel-stats">
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>3.1k</div>
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>24k</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <svg class="reel-img" viewBox="0 0 200 355" fill="none" preserveAspectRatio="xMidYMid slice"><rect width="200" height="355" fill="#2d0001"/><defs><pattern id="r3" width="28" height="28" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="28" y2="28" stroke="rgba(231,209,166,0.06)" stroke-width="0.8"/><line x1="28" y1="0" x2="0" y2="28" stroke="rgba(231,209,166,0.06)" stroke-width="0.8"/></pattern></defs><rect width="200" height="355" fill="url(#r3)"/><path d="M70 60 L55 110 L50 185 L55 285 L145 285 L150 185 L145 110 L130 60 Z" fill="rgba(200,50,50,0.1)" stroke="rgba(231,209,166,0.38)" stroke-width="1.5"/><path d="M85 60 Q100 78 115 60" fill="none" stroke="rgba(231,209,166,0.55)" stroke-width="1.5"/><g opacity="0.65"><circle cx="84" cy="160" r="8" fill="#e7d1a650"/><circle cx="100" cy="148" r="6" fill="#e7d1a640"/><circle cx="116" cy="160" r="8" fill="#e7d1a650"/><circle cx="90" cy="176" r="6" fill="#e7d1a640"/><circle cx="110" cy="174" r="8" fill="#e7d1a650"/><circle cx="84" cy="170" r="3.5" fill="#e7d1a6"/><circle cx="100" cy="160" r="3" fill="#e7d1a6"/><circle cx="116" cy="168" r="3.5" fill="#e7d1a6"/></g><text x="100" y="328" font-family="sans-serif" font-size="9" text-anchor="middle" fill="rgba(231,209,166,0.38)" letter-spacing="1.5">PHULKARI FESTIVE · VAMAS</text></svg>
+      <div class="reel-overlay"></div>
+      <div class="ig-badge"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+      <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="reel-info">
+        <div class="reel-handle">@vamas.official</div>
+        <div class="reel-stats">
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>1.8k</div>
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>15k</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <svg class="reel-img" viewBox="0 0 200 355" fill="none" preserveAspectRatio="xMidYMid slice"><rect width="200" height="355" fill="#1a0a00"/><defs><pattern id="r4" width="18" height="18" patternUnits="userSpaceOnUse"><rect x="7" y="7" width="4" height="4" fill="rgba(231,209,166,0.1)" rx="0.5"/></pattern></defs><rect width="200" height="355" fill="url(#r4)"/><path d="M70 60 L55 110 L50 185 L55 285 L145 285 L150 185 L145 110 L130 60 Z" fill="rgba(231,209,166,0.07)" stroke="rgba(231,209,166,0.4)" stroke-width="1.5"/><path d="M85 60 Q100 78 115 60" fill="none" stroke="rgba(231,209,166,0.55)" stroke-width="1.5"/><g opacity="0.65"><rect x="74" y="149" width="8" height="8" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="90" y="143" width="8" height="8" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="106" y="150" width="8" height="8" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="122" y="145" width="8" height="8" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="78" y="165" width="8" height="8" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="94" y="167" width="8" height="8" fill="#e7d1a6" rx="0.5" opacity="0.5"/><rect x="110" y="164" width="8" height="8" fill="#e7d1a6" rx="0.5" opacity="0.5"/></g><text x="100" y="328" font-family="sans-serif" font-size="9" text-anchor="middle" fill="rgba(231,209,166,0.38)" letter-spacing="1.5">GOTA PATTI · VAMAS</text></svg>
+      <div class="reel-overlay"></div>
+      <div class="ig-badge"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+      <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="reel-info">
+        <div class="reel-handle">@vamas.official</div>
+        <div class="reel-stats">
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>4.2k</div>
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>31k</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <svg class="reel-img" viewBox="0 0 200 355" fill="none" preserveAspectRatio="xMidYMid slice"><rect width="200" height="355" fill="#350001"/><defs><pattern id="r5" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M13 3L15.5 10H23L17 13.8L19.5 21L13 17L6.5 21L9 13.8L3 10H10.5Z" fill="rgba(231,209,166,0.07)"/></pattern></defs><rect width="200" height="355" fill="url(#r5)"/><path d="M70 60 L55 110 L50 185 L55 285 L145 285 L150 185 L145 110 L130 60 Z" fill="rgba(231,209,166,0.06)" stroke="rgba(231,209,166,0.36)" stroke-width="1.5"/><path d="M85 60 Q100 78 115 60" fill="none" stroke="rgba(231,209,166,0.52)" stroke-width="1.5"/><circle cx="100" cy="178" r="32" fill="none" stroke="rgba(231,209,166,0.18)" stroke-width="1.5"/><circle cx="100" cy="178" r="20" fill="none" stroke="rgba(231,209,166,0.28)" stroke-width="1.5"/><circle cx="100" cy="178" r="10" fill="rgba(231,209,166,0.18)" stroke="rgba(231,209,166,0.42)" stroke-width="1.5"/><circle cx="100" cy="178" r="4" fill="rgba(231,209,166,0.42)"/><text x="100" y="328" font-family="sans-serif" font-size="9" text-anchor="middle" fill="rgba(231,209,166,0.38)" letter-spacing="1.5">KANJEEVARAM · VAMAS</text></svg>
+      <div class="reel-overlay"></div>
+      <div class="ig-badge"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+      <div class="reel-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="reel-info">
+        <div class="reel-handle">@vamas.official</div>
+        <div class="reel-stats">
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>5.6k</div>
+          <div class="reel-stat"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>42k</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Tags -->
+<div class="tags">
+  <span class="tag">ZARI WORK</span><span class="tag">MIRROR WORK</span><span class="tag">EMBROIDERY</span>
+  <span class="tag">VELVET</span><span class="tag">PRINTED</span><span class="tag">BRIDAL</span>
+  <span class="tag">BACKLESS</span><span class="tag">COTTON</span><span class="tag">PURE SILK</span>
+  <span class="tag">CHIKANKARI</span><span class="tag">PHULKARI</span><span class="tag">GOTA PATTI</span>
+</div>
+
+<!-- Testimonials -->
+<div class="sec sec-alt">
+  <div class="sec-hdr">
+    <div><div class="sec-title">Customer <span>Reviews</span></div><div class="sec-sub">Over 10,000 happy customers</div></div>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Absolutely gorgeous blouse! The zari work is stunning and stitching quality is perfect. Got so many compliments at the wedding. Will definitely buy again!"</p>
+      <div class="test-auth"><div class="ava">P</div><div><div class="ava-name">Priya Sharma</div><div class="ava-info">Verified Buyer · Silk Zari Blouse</div></div></div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Fast delivery and beautiful packaging. The fabric quality is exactly as shown. My order arrived in 3 days and the blouse fit perfectly. Love Vamas!"</p>
+      <div class="test-auth"><div class="ava">A</div><div><div class="ava-name">Anita Menon</div><div class="ava-info">Verified Buyer · Kanjeevaram Blouse</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Dark Newsletter + Footer -->
+<div class="dark-bottom">
+  <svg class="dark-brackets" viewBox="0 0 1440 600" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;">
+    <path d="M60 100 L60 40 L120 40" stroke="rgba(231,209,166,0.12)" stroke-width="2" fill="none"/>
+    <path d="M1380 40 L1440 40 L1440 100" stroke="rgba(231,209,166,0.12)" stroke-width="2" fill="none"/>
+    <path d="M60 500 L60 560 L120 560" stroke="rgba(231,209,166,0.12)" stroke-width="2" fill="none"/>
+    <path d="M1380 560 L1440 560 L1440 500" stroke="rgba(231,209,166,0.12)" stroke-width="2" fill="none"/>
+  </svg>
+
+  <div class="dark-nl">
+    <div class="dark-nl-eye">EXCLUSIVE UPDATES</div>
+    <div class="dark-nl-h3">Stay in <em>style.</em></div>
+    <div class="dark-nl-sub">Subscribe for new arrivals, exclusive offers &amp; style inspiration</div>
+    <div class="dark-nl-form">
+      <input class="dark-nl-input" type="email" placeholder="Enter your email address">
+      <button class="dark-nl-btn">SUBSCRIBE</button>
+    </div>
+  </div>
+
+  <footer class="dark-footer">
+    <div class="dark-footer-grid">
+      <div>
+        <div class="dark-footer-logo">
+          <img src="assets/vamas-logo.avif" alt="Vamas" class="dark-footer-logo-img" onerror="this.style.display='none'">
+          <span class="dark-footer-brand">VAMAS</span>
+        </div>
+        <p class="dark-footer-desc">Premium handcrafted blouses celebrating Indian artistry. Every piece tells a story woven with love and skill.</p>
+        <div class="dark-footer-socials">
+          <div class="dark-soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <div class="dark-soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+          <div class="dark-soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+          <div class="dark-soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
+        </div>
+      </div>
+      <div>
+        <div class="dark-foot-head">QUICK LINKS</div>
+        <div class="dark-foot-links">
+          <a href="#">New Arrivals</a><a href="#">Collections</a>
+          <a href="#">Best Sellers</a><a href="#">About Us</a><a href="#">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="dark-foot-head">CUSTOMER CARE</div>
+        <div class="dark-foot-links">
+          <a href="#">Size Guide</a><a href="#">Track Order</a>
+          <a href="#">Returns &amp; Exchange</a><a href="#">FAQ</a><a href="#">Shipping Policy</a>
+        </div>
+      </div>
+      <div>
+        <div class="dark-foot-head">CONTACT US</div>
+        <div class="dark-foot-links">
+          <a href="#">support@vamas.in</a>
+          <a href="#">+91 98765 43210</a>
+          <span style="color:rgba(231,209,166,0.3);font-size:10px;">Mon–Sat: 10am – 6pm</span>
+        </div>
+      </div>
+    </div>
+    <div class="dark-footer-bot">
+      <div class="dark-foot-copy">© 2026 Vamas. All rights reserved.</div>
+      <div class="dark-foot-pay">UPI &nbsp;·&nbsp; Visa &nbsp;·&nbsp; Mastercard &nbsp;·&nbsp; Net Banking &nbsp;·&nbsp; COD</div>
+    </div>
+  </footer>
+</div>
+
+<!-- WordPress Float -->
+<a href="#" class="wp-float" title="Visit our Blog">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zM3.5 12c0-.98.18-1.92.5-2.79l2.77 7.59A8.5 8.5 0 013.5 12zm8.5 8.5c-.66 0-1.3-.09-1.9-.26l2.02-5.87 2.07 5.67c.01.04.03.07.05.1A8.48 8.48 0 0112 20.5zm1.14-11.35c.5-.03.95-.08.95-.08.45-.06.4-.71-.06-.68 0 0-1.34.11-2.2.11-.81 0-2.18-.11-2.18-.11-.45-.03-.51.65-.06.68 0 0 .42.05.87.08l1.3 3.56-1.83 5.47-3.04-9.03c.5-.03.95-.08.95-.08.45-.06.4-.71-.06-.68 0 0-1.34.11-2.2.11-.15 0-.33 0-.52-.01A8.5 8.5 0 0112 3.5c2.3 0 4.39.88 5.96 2.32-.04 0-.07-.01-.11-.01-.81 0-1.39.71-1.39 1.46 0 .68.39 1.26.81 1.94.31.55.68 1.26.68 2.28 0 .71-.27 1.53-.62 2.68l-.82 2.73-2.97-8.83zM17.17 18.8l2.71-7.83c.51-1.27.68-2.29.68-3.18 0-.33-.02-.63-.06-.91A8.5 8.5 0 0120.5 12a8.49 8.49 0 01-3.33 6.8z"/>
+  </svg>
+</a>
+
+<script>
+(function(){
+  var track = document.getElementById('track');
+  var dots  = document.querySelectorAll('.dot');
+  var cur   = 0; var total = 3; var timer;
+
+  function goTo(i){
+    cur = (i + total) % total;
+    track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+    dots.forEach(function(d,j){ d.classList.toggle('active', j === cur); });
+  }
+  function reset(){ clearInterval(timer); timer = setInterval(function(){ goTo(cur+1); }, 4500); }
+
+  document.getElementById('prev').onclick = function(){ goTo(cur-1); reset(); };
+  document.getElementById('next').onclick = function(){ goTo(cur+1); reset(); };
+  dots.forEach(function(d){ d.onclick = function(){ goTo(+this.dataset.i); reset(); }; });
+
+  // Add to Cart feedback
+  document.querySelectorAll('.atc').forEach(function(btn){
+    btn.onclick = function(){
+      var orig = btn.textContent;
+      btn.textContent = '✓ ADDED!';
+      btn.style.background = '#1a7a1a';
+      setTimeout(function(){ btn.textContent = orig; btn.style.background = ''; }, 1800);
+    };
+  });
+
+  // Wishlist toggle
+  document.querySelectorAll('.wish').forEach(function(btn){
+    btn.onclick = function(){
+      var svg = btn.querySelector('svg');
+      var active = svg.getAttribute('data-active');
+      if(active){
+        svg.removeAttribute('data-active');
+        svg.style.fill = 'none';
+        svg.style.stroke = '#420001';
+      } else {
+        svg.setAttribute('data-active','1');
+        svg.style.fill = '#420001';
+      }
+    };
+  });
+
+  reset();
+})();
+</script>
+</body>
+</html>
