@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VAMAS — Blouse Collection</title>
+  <title>VAMAS â€” Blouse Collection</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
     body { font-family: 'Poppins', sans-serif; color: var(--m); background: var(--w); }
     a { text-decoration: none; }
 
-    /* ── Announce ─── */
+    /* â”€â”€ Announce â”€â”€â”€ */
     .ann {
       background: var(--g);
       color: var(--m);
@@ -33,7 +33,7 @@
       border-bottom: 1px solid var(--gd);
     }
 
-    /* ── NAV ─── */
+    /* â”€â”€ NAV â”€â”€â”€ */
     .nav-outer {
       position: sticky;
       top: 0;
@@ -86,40 +86,41 @@
       display: flex; align-items: center; justify-content: center;
     }
 
-    /* ── HERO SLIDER ─── */
+    /* â”€â”€ HERO SLIDER â”€â”€â”€ */
     .slider-wrap { position: relative; overflow: hidden; }
     .slider-track { display: flex; transition: transform 0.65s cubic-bezier(0.4,0,0.2,1); }
     .slide {
       min-width: 100%;
-      min-height: 560px;
+      height: 620px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 80px 80px;
       position: relative;
       overflow: hidden;
     }
-    .slide::before {
-      content: '';
-      position: absolute; right: -80px; top: -80px;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: rgba(231,209,166,0.03);
-      border: 70px solid rgba(231,209,166,0.025);
-      pointer-events: none;
+    .slide-text {
+      position: relative; z-index: 3;
+      padding: 0 80px;
+      max-width: 560px;
     }
-    .slide-text { max-width: 520px; z-index: 2; }
     .slide-eye { color: rgba(231,209,166,0.65); font-size: 10px; font-weight: 700; letter-spacing: 4px; margin-bottom: 14px; }
     .slide-h1 { color: var(--g); font-size: 58px; font-weight: 800; line-height: 1.05; margin-bottom: 18px; }
     .slide-h1 em { color: var(--w); font-style: normal; }
     .slide-p { color: rgba(231,209,166,0.65); font-size: 14px; line-height: 1.85; margin-bottom: 30px; max-width: 360px; }
     .slide-btns { display: flex; gap: 14px; flex-wrap: wrap; }
     .slide-img {
-      flex-shrink: 0; width: 320px; height: 420px;
-      border-radius: 4px; overflow: hidden; z-index: 2;
-      border: 1px solid rgba(231,209,166,0.12);
+      position: absolute;
+      right: 0; top: 0;
+      width: 50%; height: 100%;
+      z-index: 1;
     }
-    .slide-img img { width: 100%; height: 100%; object-fit: cover; }
+    .slide-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
     .slide-img svg { width: 100%; height: 100%; }
+    .slide-img::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 200px; z-index: 2;
+      background: linear-gradient(to right, var(--slide-bg, #420001), transparent);
+    }
 
     /* Dots + Arrows */
     .slider-dots {
@@ -144,7 +145,7 @@
     .sarrow-l { left: 20px; }
     .sarrow-r { right: 20px; }
 
-    /* ── Buttons ─── */
+    /* â”€â”€ Buttons â”€â”€â”€ */
     .btn-p {
       background: var(--g); color: var(--m); border: none;
       padding: 13px 30px; font-size: 11px; font-weight: 800;
@@ -161,7 +162,7 @@
     }
     .btn-o:hover { background: var(--g); color: var(--m); }
 
-    /* ── Trust ─── */
+    /* â”€â”€ Trust â”€â”€â”€ */
     .trust {
       background: var(--bg);
       border-top: 1px solid rgba(231,209,166,0.4);
@@ -180,7 +181,7 @@
     .trust-title { font-size: 12px; font-weight: 700; color: var(--m); }
     .trust-sub { font-size: 10px; color: rgba(66,0,1,0.5); }
 
-    /* ── Section ─── */
+    /* â”€â”€ Section â”€â”€â”€ */
     .sec { padding: 64px 80px; }
     .sec-alt { background: var(--bg); }
     .sec-hdr { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; }
@@ -192,7 +193,7 @@
       letter-spacing: 2px; border-bottom: 1.5px solid var(--m); padding-bottom: 2px;
     }
 
-    /* ── Categories ─── */
+    /* â”€â”€ Categories â”€â”€â”€ */
     .cat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
     .cat-card {
       position: relative; border-radius: 4px; overflow: hidden;
@@ -209,7 +210,7 @@
     .cat-label { color: var(--g); font-size: 12px; font-weight: 800; letter-spacing: 2.5px; }
     .cat-count { color: rgba(231,209,166,0.65); font-size: 10px; margin-top: 3px; }
 
-    /* ── Products ─── */
+    /* â”€â”€ Products â”€â”€â”€ */
     .prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .prod-card {
       border: 1px solid rgba(231,209,166,0.5); border-radius: 8px;
@@ -254,7 +255,7 @@
     }
     .atc:hover { background: var(--ml); }
 
-    /* ── Brand ─── */
+    /* â”€â”€ Brand â”€â”€â”€ */
     .brand-sec {
       background: var(--m); padding: 80px;
       display: flex; align-items: center; gap: 64px;
@@ -269,7 +270,7 @@
     .brand-img { flex-shrink: 0; width: 340px; height: 440px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(231,209,166,0.12); }
     .brand-img img, .brand-img svg { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* ── Tags ─── */
+    /* â”€â”€ Tags â”€â”€â”€ */
     .tags {
       display: flex; flex-wrap: wrap; gap: 10px;
       padding: 20px 80px; background: var(--bg);
@@ -284,7 +285,7 @@
     }
     .tag:hover { background: var(--m); color: var(--g); }
 
-    /* ── Testimonials ─── */
+    /* â”€â”€ Testimonials â”€â”€â”€ */
     .test-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
     .test-card { background: var(--w); border: 1px solid rgba(231,209,166,0.5); border-radius: 10px; padding: 24px; }
     .test-stars { color: var(--gd); font-size: 15px; margin-bottom: 12px; }
@@ -299,7 +300,7 @@
     .ava-name { font-size: 13px; font-weight: 700; color: var(--m); }
     .ava-info { font-size: 10px; color: rgba(66,0,1,0.4); }
 
-    /* ── Newsletter ─── */
+    /* â”€â”€ Newsletter â”€â”€â”€ */
     .nl { background: var(--g); padding: 64px 80px; text-align: center; }
     .nl-eye { font-size: 10px; font-weight: 700; letter-spacing: 3px; color: rgba(66,0,1,0.55); margin-bottom: 10px; }
     .nl-h3 { font-size: 34px; font-weight: 800; color: var(--m); margin-bottom: 8px; }
@@ -318,7 +319,7 @@
     }
     .nl-btn:hover { background: var(--ml); }
 
-    /* ── Footer ─── */
+    /* â”€â”€ Footer â”€â”€â”€ */
     .footer { background: var(--m); padding: 64px 80px 32px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
     .footer-logo { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
@@ -344,7 +345,7 @@
     .foot-copy { font-size: 10px; color: rgba(231,209,166,0.3); }
     .foot-pay { font-size: 10px; color: rgba(231,209,166,0.3); }
 
-    /* ── Instagram Reels ─── */
+    /* â”€â”€ Instagram Reels â”€â”€â”€ */
     .reels-sec { padding: 64px 80px; background: var(--w); }
     .reels-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; }
     .reel-card {
@@ -380,7 +381,7 @@
     }
     .ig-badge svg { width: 15px; height: 15px; fill: none; stroke: white; stroke-width: 1.8; }
 
-    /* ── WordPress Float ─── */
+    /* â”€â”€ WordPress Float â”€â”€â”€ */
     .wp-float {
       position: fixed; bottom: 28px; right: 28px; z-index: 999;
       width: 52px; height: 52px; border-radius: 50%;
@@ -392,7 +393,7 @@
     .wp-float:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(33,117,155,0.6); }
     .wp-float svg { width: 28px; height: 28px; fill: #fff; }
 
-    /* ── Dark Footer ─── */
+    /* â”€â”€ Dark Footer â”€â”€â”€ */
     .dark-bottom { background: #2a0001; position: relative; overflow: hidden; }
     .dark-nl {
       padding: 80px 80px 64px; position: relative; z-index: 2;
@@ -452,7 +453,7 @@
     }
     .dark-foot-copy, .dark-foot-pay { font-size: 10px; color: rgba(231,209,166,0.26); }
 
-    /* ── Responsive ─── */
+    /* â”€â”€ Responsive â”€â”€â”€ */
     @media (max-width: 1024px) {
       .nav { padding: 0 40px; }
       .slide { padding: 60px 48px; }
@@ -493,7 +494,7 @@
 <body>
 
 <!-- Announce -->
-<div class="ann">✦ FREE SHIPPING ABOVE ₹999 &nbsp;&nbsp;|&nbsp;&nbsp; USE CODE FIRST10 FOR 10% OFF &nbsp;&nbsp;|&nbsp;&nbsp; NEW BRIDAL COLLECTION NOW LIVE ✦</div>
+<div class="ann">âœ¦ FREE SHIPPING ABOVE â‚¹999 &nbsp;&nbsp;|&nbsp;&nbsp; USE CODE FIRST10 FOR 10% OFF &nbsp;&nbsp;|&nbsp;&nbsp; NEW BRIDAL COLLECTION NOW LIVE âœ¦</div>
 
 <!-- Navbar -->
 <nav class="nav-outer">
@@ -520,7 +521,7 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       <span class="cart-badge">2</span>
     </a>
-    <a href="#" class="nav-contact">Contact Us ↗</a>
+    <a href="#" class="nav-contact">Contact Us â†—</a>
   </div>
   </div>
 </nav>
@@ -530,7 +531,7 @@
   <div class="slider-track" id="track">
 
     <!-- Slide 1 -->
-    <div class="slide" style="background:#420001;">
+    <div class="slide" style="background:#420001;--slide-bg:#420001;">
       <div class="slide-text">
         <p class="slide-eye">NEW COLLECTION 2026</p>
         <h1 class="slide-h1">Craft Your<br><em>Perfect</em><br>Silhouette</h1>
@@ -541,12 +542,12 @@
         </div>
       </div>
       <div class="slide-img">
-        <img src="assets/slide-pink.jpg" alt="Pink Embroidery Blouse" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        <img src="assets/slide-pink.jpg" alt="Pink Embroidery Blouse">
       </div>
     </div>
 
     <!-- Slide 2 -->
-    <div class="slide" style="background:#1a0a00;">
+    <div class="slide" style="background:#1a0a00;--slide-bg:#1a0a00;">
       <div class="slide-text">
         <p class="slide-eye">BRIDAL COLLECTION</p>
         <h1 class="slide-h1">Elegance<br>Woven in<br><em>Every Thread</em></h1>
@@ -557,12 +558,12 @@
         </div>
       </div>
       <div class="slide-img">
-        <img src="assets/slide-maroon.jpg" alt="Maroon Blouse" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        <img src="assets/slide-maroon.jpg" alt="Maroon Blouse">
       </div>
     </div>
 
     <!-- Slide 3 -->
-    <div class="slide" style="background:#2d0001;">
+    <div class="slide" style="background:#2d0001;--slide-bg:#2d0001;">
       <div class="slide-text">
         <p class="slide-eye">FESTIVE SEASON EDIT</p>
         <h1 class="slide-h1">Celebrate in<br><em>Colour</em><br>& Style</h1>
@@ -573,7 +574,7 @@
         </div>
       </div>
       <div class="slide-img">
-        <img src="assets/slide-green.jpg" alt="Bottle Green Blouse" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        <img src="assets/slide-green.jpg" alt="Bottle Green Blouse">
       </div>
     </div>
   </div>
@@ -595,7 +596,7 @@
   </div>
   <div class="trust-item">
     <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-    <div><div class="trust-title">Fast Delivery</div><div class="trust-sub">3–5 business days</div></div>
+    <div><div class="trust-title">Fast Delivery</div><div class="trust-sub">3â€“5 business days</div></div>
   </div>
   <div class="trust-item">
     <div class="trust-icon"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg></div>
@@ -603,7 +604,7 @@
   </div>
   <div class="trust-item">
     <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-    <div><div class="trust-title">Secure Payment</div><div class="trust-sub">UPI · Card · COD</div></div>
+    <div><div class="trust-title">Secure Payment</div><div class="trust-sub">UPI Â· Card Â· COD</div></div>
   </div>
 </div>
 
@@ -649,10 +650,10 @@
       </div>
       <div class="prod-body">
         <div class="prod-name">Silk Zari Mirror Blouse</div>
-        <div class="prod-type">Banarasi Silk · Mirror Work</div>
+        <div class="prod-type">Banarasi Silk Â· Mirror Work</div>
         <div class="color-dots"><div class="cdot" style="background:#420001;"></div><div class="cdot" style="background:#e7d1a6;"></div><div class="cdot" style="background:#1a1a2e;"></div><div class="cdot" style="background:#006400;"></div></div>
-        <div class="stars">★★★★★ <span class="rev">(24 reviews)</span></div>
-        <div class="price-row"><span class="price">₹1,299</span><span class="orig">₹1,999</span><span class="disc">35% off</span></div>
+        <div class="stars">â˜…â˜…â˜…â˜…â˜… <span class="rev">(24 reviews)</span></div>
+        <div class="price-row"><span class="price">â‚¹1,299</span><span class="orig">â‚¹1,999</span><span class="disc">35% off</span></div>
         <button class="atc">ADD TO CART</button>
       </div>
     </div>
@@ -665,10 +666,10 @@
       </div>
       <div class="prod-body">
         <div class="prod-name">Phulkari Embroidery Blouse</div>
-        <div class="prod-type">Cotton · Punjabi Phulkari Work</div>
+        <div class="prod-type">Cotton Â· Punjabi Phulkari Work</div>
         <div class="color-dots"><div class="cdot" style="background:#e7d1a6;"></div><div class="cdot" style="background:#ff9933;"></div><div class="cdot" style="background:#420001;"></div></div>
-        <div class="stars">★★★★☆ <span class="rev">(18 reviews)</span></div>
-        <div class="price-row"><span class="price">₹1,499</span><span class="orig">₹2,199</span><span class="disc">32% off</span></div>
+        <div class="stars">â˜…â˜…â˜…â˜…â˜† <span class="rev">(18 reviews)</span></div>
+        <div class="price-row"><span class="price">â‚¹1,499</span><span class="orig">â‚¹2,199</span><span class="disc">32% off</span></div>
         <button class="atc">ADD TO CART</button>
       </div>
     </div>
@@ -681,10 +682,10 @@
       </div>
       <div class="prod-body">
         <div class="prod-name">Velvet Zardozi Blouse</div>
-        <div class="prod-type">Premium Velvet · Zardozi Work</div>
+        <div class="prod-type">Premium Velvet Â· Zardozi Work</div>
         <div class="color-dots"><div class="cdot" style="background:#800020;"></div><div class="cdot" style="background:#1a1a2e;"></div><div class="cdot" style="background:#006400;"></div></div>
-        <div class="stars">★★★★★ <span class="rev">(41 reviews)</span></div>
-        <div class="price-row"><span class="price">₹1,099</span><span class="orig">₹1,799</span><span class="disc">39% off</span></div>
+        <div class="stars">â˜…â˜…â˜…â˜…â˜… <span class="rev">(41 reviews)</span></div>
+        <div class="price-row"><span class="price">â‚¹1,099</span><span class="orig">â‚¹1,799</span><span class="disc">39% off</span></div>
         <button class="atc">ADD TO CART</button>
       </div>
     </div>
@@ -697,11 +698,11 @@
   <div class="brand-text">
     <div class="brand-eye">OUR STORY</div>
     <div class="brand-h2">Woven with Love,<br>Crafted with Precision</div>
-    <div class="brand-p">Each blouse is handcrafted by skilled artisans using premium fabrics sourced across India. From bridal zari to everyday cotton, we celebrate the art of Indian craftsmanship — one thread at a time.</div>
+    <div class="brand-p">Each blouse is handcrafted by skilled artisans using premium fabrics sourced across India. From bridal zari to everyday cotton, we celebrate the art of Indian craftsmanship â€” one thread at a time.</div>
     <div class="brand-stats">
       <div><div class="stat-num">500+</div><div class="stat-lbl">DESIGNS</div></div>
       <div><div class="stat-num">10K+</div><div class="stat-lbl">CUSTOMERS</div></div>
-      <div><div class="stat-num">4.9★</div><div class="stat-lbl">RATING</div></div>
+      <div><div class="stat-num">4.9â˜…</div><div class="stat-lbl">RATING</div></div>
     </div>
     <button class="btn-o">EXPLORE OUR STORY</button>
   </div>
@@ -725,10 +726,10 @@
       </div>
       <div class="prod-body">
         <div class="prod-name">Kanjeevaram Cut Blouse</div>
-        <div class="prod-type">Pure Silk · Traditional Weave</div>
+        <div class="prod-type">Pure Silk Â· Traditional Weave</div>
         <div class="color-dots"><div class="cdot" style="background:#420001;"></div><div class="cdot" style="background:#006400;"></div><div class="cdot" style="background:#1a1a2e;"></div></div>
-        <div class="stars">★★★★★ <span class="rev">(62 reviews)</span></div>
-        <div class="price-row"><span class="price">₹2,199</span><span class="orig">₹2,999</span><span class="disc">27% off</span></div>
+        <div class="stars">â˜…â˜…â˜…â˜…â˜… <span class="rev">(62 reviews)</span></div>
+        <div class="price-row"><span class="price">â‚¹2,199</span><span class="orig">â‚¹2,999</span><span class="disc">27% off</span></div>
         <button class="atc">ADD TO CART</button>
       </div>
     </div>
@@ -740,10 +741,10 @@
       </div>
       <div class="prod-body">
         <div class="prod-name">Chikankari Lucknowi</div>
-        <div class="prod-type">Georgette · Hand Embroidery</div>
+        <div class="prod-type">Georgette Â· Hand Embroidery</div>
         <div class="color-dots"><div class="cdot" style="background:#fff;border-color:#ccc;"></div><div class="cdot" style="background:#e7d1a6;"></div><div class="cdot" style="background:#ffc0cb;"></div></div>
-        <div class="stars">★★★★★ <span class="rev">(57 reviews)</span></div>
-        <div class="price-row"><span class="price">₹1,399</span><span class="orig">₹1,899</span><span class="disc">26% off</span></div>
+        <div class="stars">â˜…â˜…â˜…â˜…â˜… <span class="rev">(57 reviews)</span></div>
+        <div class="price-row"><span class="price">â‚¹1,399</span><span class="orig">â‚¹1,899</span><span class="disc">26% off</span></div>
         <button class="atc">ADD TO CART</button>
       </div>
     </div>
@@ -754,10 +755,10 @@
       </div>
       <div class="prod-body">
         <div class="prod-name">Gota Patti Blouse</div>
-        <div class="prod-type">Pure Silk · Rajasthani Work</div>
+        <div class="prod-type">Pure Silk Â· Rajasthani Work</div>
         <div class="color-dots"><div class="cdot" style="background:#8b0000;"></div><div class="cdot" style="background:#e7d1a6;"></div><div class="cdot" style="background:#00008b;"></div></div>
-        <div class="stars">★★★★★ <span class="rev">(33 reviews)</span></div>
-        <div class="price-row"><span class="price">₹1,749</span><span class="orig">₹2,499</span><span class="disc">30% off</span></div>
+        <div class="stars">â˜…â˜…â˜…â˜…â˜… <span class="rev">(33 reviews)</span></div>
+        <div class="price-row"><span class="price">â‚¹1,749</span><span class="orig">â‚¹2,499</span><span class="disc">30% off</span></div>
         <button class="atc">ADD TO CART</button>
       </div>
     </div>
@@ -860,14 +861,14 @@
   </div>
   <div class="test-grid">
     <div class="test-card">
-      <div class="test-stars">★★★★★</div>
+      <div class="test-stars">â˜…â˜…â˜…â˜…â˜…</div>
       <p class="test-text">"Absolutely gorgeous blouse! The zari work is stunning and stitching quality is perfect. Got so many compliments at the wedding. Will definitely buy again!"</p>
-      <div class="test-auth"><div class="ava">P</div><div><div class="ava-name">Priya Sharma</div><div class="ava-info">Verified Buyer · Silk Zari Blouse</div></div></div>
+      <div class="test-auth"><div class="ava">P</div><div><div class="ava-name">Priya Sharma</div><div class="ava-info">Verified Buyer Â· Silk Zari Blouse</div></div></div>
     </div>
     <div class="test-card">
-      <div class="test-stars">★★★★★</div>
+      <div class="test-stars">â˜…â˜…â˜…â˜…â˜…</div>
       <p class="test-text">"Fast delivery and beautiful packaging. The fabric quality is exactly as shown. My order arrived in 3 days and the blouse fit perfectly. Love Vamas!"</p>
-      <div class="test-auth"><div class="ava">A</div><div><div class="ava-name">Anita Menon</div><div class="ava-info">Verified Buyer · Kanjeevaram Blouse</div></div></div>
+      <div class="test-auth"><div class="ava">A</div><div><div class="ava-name">Anita Menon</div><div class="ava-info">Verified Buyer Â· Kanjeevaram Blouse</div></div></div>
     </div>
   </div>
 </div>
@@ -924,13 +925,13 @@
         <div class="dark-foot-links">
           <a href="#">support@vamas.in</a>
           <a href="#">+91 98765 43210</a>
-          <span style="color:rgba(231,209,166,0.3);font-size:10px;">Mon–Sat: 10am – 6pm</span>
+          <span style="color:rgba(231,209,166,0.3);font-size:10px;">Monâ€“Sat: 10am â€“ 6pm</span>
         </div>
       </div>
     </div>
     <div class="dark-footer-bot">
-      <div class="dark-foot-copy">© 2026 Vamas. All rights reserved.</div>
-      <div class="dark-foot-pay">UPI &nbsp;·&nbsp; Visa &nbsp;·&nbsp; Mastercard &nbsp;·&nbsp; Net Banking &nbsp;·&nbsp; COD</div>
+      <div class="dark-foot-copy">Â© 2026 Vamas. All rights reserved.</div>
+      <div class="dark-foot-pay">UPI &nbsp;Â·&nbsp; Visa &nbsp;Â·&nbsp; Mastercard &nbsp;Â·&nbsp; Net Banking &nbsp;Â·&nbsp; COD</div>
     </div>
   </footer>
 </div>
@@ -963,7 +964,7 @@
   document.querySelectorAll('.atc').forEach(function(btn){
     btn.onclick = function(){
       var orig = btn.textContent;
-      btn.textContent = '✓ ADDED!';
+      btn.textContent = 'âœ“ ADDED!';
       btn.style.background = '#1a7a1a';
       setTimeout(function(){ btn.textContent = orig; btn.style.background = ''; }, 1800);
     };
@@ -990,3 +991,4 @@
 </script>
 </body>
 </html>
+
