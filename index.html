@@ -216,7 +216,7 @@
       overflow: hidden; background: var(--w); transition: box-shadow 0.25s;
     }
     .prod-card:hover { box-shadow: 0 8px 36px rgba(66,0,1,0.1); }
-    .prod-img-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; background: rgba(231,209,166,0.12); }
+    .prod-img-wrap { position: relative; height: 330px; overflow: hidden; background: rgba(231,209,166,0.12); }
     .prod-img-wrap img, .prod-img-wrap svg { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
     .prod-card:hover .prod-img-wrap img,
     .prod-card:hover .prod-img-wrap svg { transform: scale(1.05); }
@@ -431,7 +431,7 @@
     .dark-footer { padding: 52px 80px 32px; position: relative; z-index: 2; }
     .dark-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
     .dark-footer-logo { display: flex; align-items: center; gap: 11px; margin-bottom: 14px; }
-    .dark-footer-logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(231,209,166,0.28); }
+    .dark-footer-logo-img { height: 44px; width: auto; object-fit: contain; display: block; }
     .dark-footer-brand { font-size: 16px; font-weight: 800; color: var(--g); letter-spacing: 3px; }
     .dark-footer-desc { font-size: 11px; color: rgba(231,209,166,0.42); line-height: 1.85; margin-bottom: 20px; }
     .dark-footer-socials { display: flex; gap: 8px; }
@@ -896,7 +896,6 @@
       <div>
         <div class="dark-footer-logo">
           <img src="assets/vamas-logo.avif" alt="Vamas" class="dark-footer-logo-img" onerror="this.style.display='none'">
-          <span class="dark-footer-brand">VAMAS</span>
         </div>
         <p class="dark-footer-desc">Premium handcrafted blouses celebrating Indian artistry. Every piece tells a story woven with love and skill.</p>
         <div class="dark-footer-socials">
