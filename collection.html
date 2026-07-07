@@ -624,36 +624,36 @@ input[type=range]{
 .wp-float:hover{background:#005f8e;transform:scale(1.08);}
 
 /* -- RESPONSIVE -- */
-@media(max-width:1100px){
-  .prod-grid{grid-template-columns:repeat(3,1fr);}
+@media (max-width: 768px) {
+  .nav-outer { padding: 8px 14px; background: var(--bg); }
+  .nav { padding: 6px 14px; border-radius: 50px; }
+  .nav-logo-img { height: 34px; }
+  .nav-links { display: none; }
+
+  .col-hero { padding: 32px 20px; min-height: 160px; }
+  .col-hero-title { font-size: 28px; }
+  .col-hero-right { display: none; }
+
+  .col-body { flex-direction: column; padding: 20px 16px 40px; }
+  .sidebar { width: 100%; min-width: unset; position: static; margin-right: 0; margin-bottom: 20px; }
+  .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .p-img-wrap { height: 200px; }
+
+  .mob-filter-bar { display: flex; gap: 8px; padding: 12px 16px 0; flex-wrap: wrap; }
+
+  .dark-footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .dark-footer { padding: 28px 16px; }
+  .dark-nl { padding: 40px 20px 32px; }
+  .dark-nl-form { flex-direction: column; }
+  .dark-nl-input { border-radius: 8px; }
+  .dark-nl-btn { border-radius: 8px; padding: 14px; }
 }
-@media(max-width:900px){
-  .col-body{padding:28px 24px 48px;}
-  .col-hero{padding:0 24px;}
-  .dark-footer{padding:32px 24px 0;}
-  .dark-footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
-}
-@media(max-width:768px){
-  .nav-links{display:none;}
-  .sidebar{display:none;}
-  .mob-filter-bar{
-    display:flex;
-    gap:8px;
-    padding:12px 24px 0;
-    flex-wrap:wrap;
-  }
-  .col-body{flex-direction:column;}
-  .col-hero-right{display:none;}
-  .col-hero{min-height:160px;}
-  .col-hero-title{font-size:30px;}
-  .prod-grid{grid-template-columns:repeat(2,1fr);}
-  .dark-footer-grid{grid-template-columns:1fr;}
-  .dark-footer-bot{flex-direction:column;text-align:center;}
-}
-@media(max-width:480px){
-  .prod-grid{grid-template-columns:1fr;}
-  .col-hero{padding:0 16px;}
-  .col-body{padding:20px 16px 48px;}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .col-body { padding: 28px 32px 48px; }
+  .sidebar { width: 200px; min-width: 200px; }
+  .prod-grid { grid-template-columns: repeat(3, 1fr); }
+  .dark-footer-grid { grid-template-columns: 2fr 1fr 1fr; }
 }
 </style>
 </head>
@@ -675,6 +675,8 @@ input[type=range]{
       <a href="#">OCCASION</a>
       <a href="#">FABRIC</a>
       <a href="#">SALE</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
     </div>
     <div class="nav-icons">
       <a href="#" title="Search"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
