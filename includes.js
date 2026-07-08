@@ -183,4 +183,98 @@
     initHamburger();
   }
 
+  /* ---------- WHATSAPP WIDGET CSS ---------- */
+  var waCSS = [
+    '.wp-float{display:none!important;}',
+    '#wa-fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9999;box-shadow:0 4px 20px rgba(37,211,102,.45);border:none;transition:transform .2s,box-shadow .2s;}',
+    '#wa-fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.55);}',
+    '#wa-fab svg{width:30px;height:30px;}',
+    '#wa-popup{position:fixed;bottom:92px;right:24px;width:300px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);z-index:9998;overflow:hidden;transform:scale(.85) translateY(12px);opacity:0;pointer-events:none;transition:all .22s cubic-bezier(.4,0,.2,1);}',
+    '#wa-popup.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all;}',
+    '#wa-popup-head{background:#075E54;padding:14px 16px;display:flex;align-items:center;gap:12px;}',
+    '#wa-popup-avatar{width:42px;height:42px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}',
+    '#wa-popup-avatar svg{width:22px;height:22px;}',
+    '#wa-popup-name{color:#fff;font-size:13px;font-weight:700;letter-spacing:.5px;}',
+    '#wa-popup-status{color:rgba(255,255,255,.65);font-size:11px;margin-top:2px;}',
+    '#wa-popup-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.7);font-size:20px;cursor:pointer;line-height:1;padding:0 2px;}',
+    '#wa-popup-close:hover{color:#fff;}',
+    '#wa-chat-area{background:#e5ddd5;padding:14px 14px 8px;min-height:80px;}',
+    '#wa-bubble{background:#fff;border-radius:4px 12px 12px 12px;padding:10px 13px;font-size:12.5px;color:#333;line-height:1.55;box-shadow:0 1px 2px rgba(0,0,0,.12);position:relative;}',
+    '#wa-bubble::before{content:"";position:absolute;left:-7px;top:0;border:6px solid transparent;border-right-color:#fff;border-top-color:#fff;}',
+    '#wa-bubble-time{font-size:10px;color:#aaa;text-align:right;margin-top:4px;}',
+    '#wa-quick-replies{padding:10px 14px 12px;display:flex;flex-direction:column;gap:6px;}',
+    '.wa-qr{background:#fff;border:1.5px solid #25D366;color:#075E54;border-radius:20px;padding:7px 14px;font-size:11.5px;font-weight:600;cursor:pointer;text-align:center;transition:background .15s;}',
+    '.wa-qr:hover{background:#e9fdf0;}',
+    '#wa-cta{display:block;background:#25D366;color:#fff;text-align:center;padding:13px;font-size:12px;font-weight:700;letter-spacing:1px;text-decoration:none;transition:background .2s;font-family:"Poppins",sans-serif;}',
+    '#wa-cta:hover{background:#1ebe5c;}',
+    '#wa-cta svg{vertical-align:middle;margin-right:6px;}'
+  ].join('');
+
+  var waStyle = document.createElement('style');
+  waStyle.textContent = waCSS;
+  document.head.appendChild(waStyle);
+
+  /* ---------- WHATSAPP WIDGET HTML ---------- */
+  var WA_NUM = '919876543210';
+  var WA_MSG = encodeURIComponent('Hi VAMAS! I am interested in your blouses.');
+
+  var waHTML = ''
+    + '<button id="wa-fab" title="Chat on WhatsApp">'
+    + '<svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">'
+    + '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>'
+    + '<path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.12 1.532 5.853L.073 23.927a.5.5 0 0 0 .612.612l6.074-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.16-1.424l-.37-.22-3.825.919.919-3.825-.22-.37A9.957 9.957 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>'
+    + '</svg>'
+    + '</button>'
+    + '<div id="wa-popup">'
+    + '<div id="wa-popup-head">'
+    + '<div id="wa-popup-avatar"><svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.12 1.532 5.853L.073 23.927a.5.5 0 0 0 .612.612l6.074-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.16-1.424l-.37-.22-3.825.919.919-3.825-.22-.37A9.957 9.957 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></div>'
+    + '<div><div id="wa-popup-name">VAMAS</div><div id="wa-popup-status">&#9679; Typically replies in minutes</div></div>'
+    + '<button id="wa-popup-close" title="Close">&times;</button>'
+    + '</div>'
+    + '<div id="wa-chat-area">'
+    + '<div id="wa-bubble">Namaste! &#128075; Welcome to <strong>VAMAS</strong>.<br>How can we help you today?<div id="wa-bubble-time">Now</div></div>'
+    + '</div>'
+    + '<div id="wa-quick-replies">'
+    + '<button class="wa-qr" data-msg="Hi! I want to place an order for a blouse.">&#128722; Place an Order</button>'
+    + '<button class="wa-qr" data-msg="Hi! I need help with custom size stitching.">&#9986; Custom Size / Stitching</button>'
+    + '<button class="wa-qr" data-msg="Hi! I want to track my order.">&#128666; Track My Order</button>'
+    + '</div>'
+    + '<a id="wa-cta" href="https://wa.me/' + WA_NUM + '?text=' + WA_MSG + '" target="_blank" rel="noopener">'
+    + '<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.12 1.532 5.853L.073 23.927a.5.5 0 0 0 .612.612l6.074-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.16-1.424l-.37-.22-3.825.919.919-3.825-.22-.37A9.957 9.957 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>'
+    + 'Open WhatsApp Chat'
+    + '</a>'
+    + '</div>';
+
+  /* ---------- INJECT WHATSAPP WIDGET ---------- */
+  function initWA() {
+    var waWrap = document.createElement('div');
+    waWrap.innerHTML = waHTML;
+    while (waWrap.firstChild) document.body.appendChild(waWrap.firstChild);
+
+    var fab = document.getElementById('wa-fab');
+    var popup = document.getElementById('wa-popup');
+    var closeBtn = document.getElementById('wa-popup-close');
+
+    fab.addEventListener('click', function () {
+      popup.classList.toggle('open');
+    });
+    closeBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      popup.classList.remove('open');
+    });
+
+    document.querySelectorAll('.wa-qr').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var msg = encodeURIComponent(this.dataset.msg);
+        window.open('https://wa.me/' + WA_NUM + '?text=' + msg, '_blank');
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWA);
+  } else {
+    initWA();
+  }
+
 })();
