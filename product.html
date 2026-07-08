@@ -222,7 +222,7 @@
   <div class="prod-gallery">
     <div class="gallery-main">
       <img src="assets/slide-pink.jpg" alt="Silk Zari Mirror Blouse" style="width:100%;height:100%;object-fit:cover;object-position:top;">
-      <button class="zoom-btn">" ZOOM</button>
+      <button class="zoom-btn">&#128269; ZOOM</button>
     </div>
     <!-- Thumbnail strip -->
     <div class="thumb-strip">
@@ -265,11 +265,12 @@
     <div class="color-section">
       <div class="selector-label">SELECT COLOR</div>
       <div class="color-swatches">
-        <div class="swatch active" style="background:#420001;" data-color="Maroon" title="Maroon"></div>
-        <div class="swatch" style="background:#1a1a2e;" data-color="Navy" title="Navy"></div>
-        <div class="swatch" style="background:#1a4a1a;" data-color="Forest" title="Forest Green"></div>
-        <div class="swatch" style="background:#c9a96e;" data-color="Gold" title="Gold"></div>
+        <div class="swatch active" style="background:#420001;" data-color="Maroon" data-img="assets/slide-pink.jpg" title="Maroon"></div>
+        <div class="swatch" style="background:#1a1a2e;" data-color="Navy" data-img="assets/prod-indigo.jpg" title="Navy"></div>
+        <div class="swatch" style="background:#1a4a1a;" data-color="Forest" data-img="assets/slide-green.jpg" title="Forest Green"></div>
+        <div class="swatch" style="background:#c9a96e;" data-color="Gold" data-img="assets/prod-blue.jpg" title="Gold"></div>
       </div>
+      <div id="color-name" style="font-size:12px;color:#666;margin-top:8px;font-weight:500;">Color: <strong>Maroon</strong></div>
     </div>
     <div class="size-section">
       <div class="size-label-row">
@@ -277,13 +278,14 @@
         <a href="#" class="size-chart-link">Size Chart -></a>
       </div>
       <div class="size-buttons">
-        <button class="size-btn">XS</button>
-        <button class="size-btn">S</button>
-        <button class="size-btn">M</button>
-        <button class="size-btn">L</button>
-        <button class="size-btn active">XL</button>
-        <button class="size-btn">XXL</button>
-        <button class="size-btn">CUSTOM</button>
+        <button class="size-btn">32</button>
+        <button class="size-btn">33</button>
+        <button class="size-btn active">34</button>
+        <button class="size-btn">35</button>
+        <button class="size-btn">36</button>
+        <button class="size-btn">37</button>
+        <button class="size-btn">38</button>
+        <button class="size-btn">39</button>
       </div>
     </div>
     <div class="custom-note"> Free custom stitching - just share your measurements at checkout</div>
@@ -299,10 +301,11 @@
     <button class="btn-buy">BUY NOW</button>
     <a href="#" class="wishlist-link" id="wishlist-btn">&#9825; Add to Wishlist</a>
     <div class="trust-row">
-      <span class="trust-item">&rsaquo; Authentic</span>
-      <span class="trust-item"> Ships in 2 days</span>
-      <span class="trust-item">" 7-day returns</span>
-      <span class="trust-item">"' Secure payment</span>
+      <span class="trust-item">&#10003; 100% Authentic</span>
+      <span class="trust-item">&#128666; Ships in 2 days</span>
+      <span class="trust-item">&#8635; 7-day returns</span>
+      <span class="trust-item">&#128274; Secure payment</span>
+      <span class="trust-item">&#9998; Free custom stitching</span>
     </div>
     <div class="accordion">
       <div class="acc-item open">
@@ -310,10 +313,18 @@
         <div class="acc-body">
           <div class="acc-content">
             <div class="detail-row"><span class="detail-key">Fabric</span><span class="detail-val">100% Banarasi Silk</span></div>
-            <div class="detail-row"><span class="detail-key">Work</span><span class="detail-val">Hand Mirror Embroidery</span></div>
-            <div class="detail-row"><span class="detail-key">Blouse Type</span><span class="detail-val">Regular</span></div>
-            <div class="detail-row"><span class="detail-key">Occasion</span><span class="detail-val">Bridal / Festive</span></div>
+            <div class="detail-row"><span class="detail-key">Work</span><span class="detail-val">Hand Mirror Embroidery (Shisha Work)</span></div>
+            <div class="detail-row"><span class="detail-key">Blouse Type</span><span class="detail-val">Readymade / Stitched</span></div>
+            <div class="detail-row"><span class="detail-key">Neck Style</span><span class="detail-val">Boat Neck (Front)</span></div>
+            <div class="detail-row"><span class="detail-key">Back Design</span><span class="detail-val">Deep V Back with Tie-Up Strings</span></div>
+            <div class="detail-row"><span class="detail-key">Sleeve Length</span><span class="detail-val">3/4 Sleeve (Elbow Length)</span></div>
+            <div class="detail-row"><span class="detail-key">Lining</span><span class="detail-val">Soft Cotton Inner Lining</span></div>
+            <div class="detail-row"><span class="detail-key">Closure</span><span class="detail-val">Hook &amp; Eye (5 Hooks)</span></div>
+            <div class="detail-row"><span class="detail-key">Blouse Length</span><span class="detail-val">14.5 – 16.5 inches (size dependent)</span></div>
+            <div class="detail-row"><span class="detail-key">Fabric Weight</span><span class="detail-val">110 GSM</span></div>
+            <div class="detail-row"><span class="detail-key">Occasion</span><span class="detail-val">Bridal / Festive / Wedding</span></div>
             <div class="detail-row"><span class="detail-key">Care</span><span class="detail-val">Dry Clean Only</span></div>
+            <div class="detail-row"><span class="detail-key">Origin</span><span class="detail-val">Handcrafted in India</span></div>
           </div>
         </div>
       </div>
@@ -322,14 +333,16 @@
         <div class="acc-body">
           <div class="acc-content">
             <table class="size-table">
-              <thead><tr><th>Size</th><th>Bust (in)</th><th>Waist (in)</th><th>Length (in)</th></tr></thead>
+              <thead><tr><th>Size</th><th>Bust (in)</th><th>Waist (in)</th><th>Hip (in)</th><th>Length (in)</th></tr></thead>
               <tbody>
-                <tr><td>XS</td><td>32</td><td>26</td><td>15</td></tr>
-                <tr><td>S</td><td>34</td><td>28</td><td>15.5</td></tr>
-                <tr><td>M</td><td>36</td><td>30</td><td>16</td></tr>
-                <tr><td>L</td><td>38</td><td>32</td><td>16.5</td></tr>
-                <tr><td>XL</td><td>40</td><td>34</td><td>17</td></tr>
-                <tr><td>XXL</td><td>42</td><td>36</td><td>17.5</td></tr>
+                <tr><td>32</td><td>32</td><td>26</td><td>34</td><td>14.5</td></tr>
+                <tr><td>33</td><td>33</td><td>27</td><td>35</td><td>15</td></tr>
+                <tr><td>34</td><td>34</td><td>28</td><td>36</td><td>15</td></tr>
+                <tr><td>35</td><td>35</td><td>29</td><td>37</td><td>15.5</td></tr>
+                <tr><td>36</td><td>36</td><td>30</td><td>38</td><td>15.5</td></tr>
+                <tr><td>37</td><td>37</td><td>31</td><td>39</td><td>16</td></tr>
+                <tr><td>38</td><td>38</td><td>32</td><td>40</td><td>16</td></tr>
+                <tr><td>39</td><td>39</td><td>33</td><td>41</td><td>16.5</td></tr>
               </tbody>
             </table>
           </div>
@@ -463,7 +476,7 @@
     <div class="rev-cards">
       <div class="rev-card">
         <div class="rev-top">
-          <div><span class="rev-name">Priya Sharma</span><span class="rev-verified">" Verified Purchase</span></div>
+          <div><span class="rev-name">Priya Sharma</span><span class="rev-verified">&#10003; Verified Purchase</span></div>
           <div><div class="rev-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="rev-date">Dec 2025</div></div>
         </div>
         <div class="rev-title">Absolutely Stunning!</div>
@@ -472,7 +485,7 @@
       </div>
       <div class="rev-card">
         <div class="rev-top">
-          <div><span class="rev-name">Meera Krishnan</span><span class="rev-verified">" Verified Purchase</span></div>
+          <div><span class="rev-name">Meera Krishnan</span><span class="rev-verified">&#10003; Verified Purchase</span></div>
           <div><div class="rev-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="rev-date">Nov 2025</div></div>
         </div>
         <div class="rev-title">Perfect for my wedding!</div>
@@ -481,7 +494,7 @@
       </div>
       <div class="rev-card">
         <div class="rev-top">
-          <div><span class="rev-name">Anita Patel</span><span class="rev-verified">" Verified Purchase</span></div>
+          <div><span class="rev-name">Anita Patel</span><span class="rev-verified">&#10003; Verified Purchase</span></div>
           <div><div class="rev-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9734;</div><div class="rev-date">Oct 2025</div></div>
         </div>
         <div class="rev-title">Beautiful but sizing runs small</div>
@@ -502,11 +515,15 @@
 <script src="includes.js"></script>
 
 <script>
-  // Thumbnails
+  var mainImg = document.querySelector('.gallery-main img');
+
+  // Thumbnails — click changes main image
   document.querySelectorAll('.thumb-item').forEach(t => {
     t.addEventListener('click', function() {
       document.querySelectorAll('.thumb-item').forEach(x => x.classList.remove('active'));
       this.classList.add('active');
+      var src = this.querySelector('img').src;
+      mainImg.src = src;
     });
   });
 
@@ -518,11 +535,14 @@
     });
   });
 
-  // Color swatches
+  // Color swatches — click changes main image + label
   document.querySelectorAll('.swatch').forEach(s => {
     s.addEventListener('click', function() {
       document.querySelectorAll('.swatch').forEach(x => x.classList.remove('active'));
       this.classList.add('active');
+      if (this.dataset.img) mainImg.src = this.dataset.img;
+      var label = document.getElementById('color-name');
+      if (label) label.innerHTML = 'Color: <strong>' + this.dataset.color + '</strong>';
     });
   });
 
@@ -533,7 +553,7 @@
 
   // Add to Cart
   document.getElementById('atc-btn').addEventListener('click', function() {
-    this.textContent = '" ADDED TO CART!';
+    this.textContent = '✓ ADDED TO CART!';
     this.classList.add('added');
     setTimeout(() => { this.textContent = 'ADD TO CART'; this.classList.remove('added'); }, 1800);
   });
