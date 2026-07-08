@@ -243,6 +243,36 @@
     .lb-prev{left:16px;}
     .lb-next{right:16px;}
 
+    /* ── Size Chart Modal ── */
+    .sc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:7500;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+    .sc-overlay.open{opacity:1;pointer-events:all;}
+    .sc-modal{background:#fff;border-radius:16px;width:100%;max-width:600px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,0.22);transform:translateY(20px) scale(0.97);transition:transform 0.25s;}
+    .sc-overlay.open .sc-modal{transform:translateY(0) scale(1);}
+    .sc-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px;border-bottom:1px solid rgba(66,0,1,0.08);}
+    .sc-title{font-size:14px;font-weight:800;color:var(--m);letter-spacing:1px;}
+    .sc-close{background:none;border:none;font-size:22px;cursor:pointer;color:#aaa;line-height:1;padding:0 4px;}
+    .sc-close:hover{color:var(--m);}
+    .sc-toggle{display:flex;background:#f3f3f3;border-radius:20px;padding:3px;}
+    .sc-toggle-btn{padding:5px 14px;border-radius:17px;border:none;font-size:11px;font-weight:700;font-family:'Poppins',sans-serif;cursor:pointer;transition:all 0.18s;background:transparent;color:#888;}
+    .sc-toggle-btn.active{background:var(--m);color:var(--g);}
+    .sc-body{overflow-y:auto;padding:16px 20px 20px;}
+    .sc-hint{font-size:11px;color:#999;margin-bottom:12px;}
+    .sc-table{width:100%;border-collapse:collapse;font-size:13px;}
+    .sc-table th{background:var(--m);color:var(--g);padding:10px 14px;text-align:center;font-size:10px;letter-spacing:1.2px;font-weight:700;}
+    .sc-table th:first-child{text-align:left;border-radius:4px 0 0 0;}
+    .sc-table th:last-child{border-radius:0 4px 0 0;}
+    .sc-table td{padding:10px 14px;border-bottom:1px solid rgba(66,0,1,0.06);text-align:center;color:#333;}
+    .sc-table td:first-child{text-align:left;font-weight:700;color:var(--m);}
+    .sc-table tr:nth-child(even) td{background:rgba(66,0,1,0.025);}
+    .sc-table tr.sc-active td{background:rgba(66,0,1,0.07);font-weight:600;}
+    .sc-note{margin-top:14px;background:#fff8ee;border-left:3px solid var(--g);padding:10px 14px;border-radius:0 6px 6px 0;font-size:11px;color:#666;line-height:1.6;}
+    @media(max-width:600px){
+      .sc-overlay{align-items:flex-end;padding:0;}
+      .sc-modal{border-radius:16px 16px 0 0;max-height:85vh;}
+      .sc-table{font-size:12px;}
+      .sc-table td,.sc-table th{padding:8px 10px;}
+    }
+
     /* ── WP float (hidden by includes.js) ── */
     .wp-float{display:none;}
 
@@ -625,6 +655,45 @@
 <div id="site-footer"></div>
 <div class="wp-float">W</div>
 
+<!-- Size Chart Modal -->
+<div class="sc-overlay" id="sc-overlay">
+  <div class="sc-modal">
+    <div class="sc-head">
+      <span class="sc-title">SIZE CHART</span>
+      <div class="sc-toggle">
+        <button class="sc-toggle-btn active" id="btn-inch">INCHES</button>
+        <button class="sc-toggle-btn" id="btn-cm">CM</button>
+      </div>
+      <button class="sc-close" id="sc-close">&times;</button>
+    </div>
+    <div class="sc-body">
+      <p class="sc-hint">Measure your body (not the garment). If between sizes, choose the larger size.</p>
+      <table class="sc-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Bust</th>
+            <th>Waist</th>
+            <th>Hip</th>
+            <th>Length</th>
+          </tr>
+        </thead>
+        <tbody id="sc-tbody">
+          <tr data-size="32"><td>32</td><td class="sc-val" data-in="32" data-cm="81.3">32</td><td class="sc-val" data-in="26" data-cm="66.0">26</td><td class="sc-val" data-in="34" data-cm="86.4">34</td><td class="sc-val" data-in="14.5" data-cm="36.8">14.5</td></tr>
+          <tr data-size="33"><td>33</td><td class="sc-val" data-in="33" data-cm="83.8">33</td><td class="sc-val" data-in="27" data-cm="68.6">27</td><td class="sc-val" data-in="35" data-cm="88.9">35</td><td class="sc-val" data-in="15" data-cm="38.1">15</td></tr>
+          <tr data-size="34" class="sc-active"><td>34</td><td class="sc-val" data-in="34" data-cm="86.4">34</td><td class="sc-val" data-in="28" data-cm="71.1">28</td><td class="sc-val" data-in="36" data-cm="91.4">36</td><td class="sc-val" data-in="15" data-cm="38.1">15</td></tr>
+          <tr data-size="35"><td>35</td><td class="sc-val" data-in="35" data-cm="88.9">35</td><td class="sc-val" data-in="29" data-cm="73.7">29</td><td class="sc-val" data-in="37" data-cm="94.0">37</td><td class="sc-val" data-in="15.5" data-cm="39.4">15.5</td></tr>
+          <tr data-size="36"><td>36</td><td class="sc-val" data-in="36" data-cm="91.4">36</td><td class="sc-val" data-in="30" data-cm="76.2">30</td><td class="sc-val" data-in="38" data-cm="96.5">38</td><td class="sc-val" data-in="15.5" data-cm="39.4">15.5</td></tr>
+          <tr data-size="37"><td>37</td><td class="sc-val" data-in="37" data-cm="94.0">37</td><td class="sc-val" data-in="31" data-cm="78.7">31</td><td class="sc-val" data-in="39" data-cm="99.1">39</td><td class="sc-val" data-in="16" data-cm="40.6">16</td></tr>
+          <tr data-size="38"><td>38</td><td class="sc-val" data-in="38" data-cm="96.5">38</td><td class="sc-val" data-in="32" data-cm="81.3">32</td><td class="sc-val" data-in="40" data-cm="101.6">40</td><td class="sc-val" data-in="16" data-cm="40.6">16</td></tr>
+          <tr data-size="39"><td>39</td><td class="sc-val" data-in="39" data-cm="99.1">39</td><td class="sc-val" data-in="33" data-cm="83.8">33</td><td class="sc-val" data-in="41" data-cm="104.1">41</td><td class="sc-val" data-in="16.5" data-cm="41.9">16.5</td></tr>
+        </tbody>
+      </table>
+      <div class="sc-note">&#128161; <strong>How to measure:</strong> Use a soft measuring tape. Bust = fullest part of chest. Waist = narrowest part. Hip = fullest part below waist. Length = shoulder seam to blouse hem.</div>
+    </div>
+  </div>
+</div>
+
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <button class="lb-arrow lb-prev" id="lb-prev">&#8249;</button>
@@ -718,28 +787,55 @@
         label.textContent = '✓ In stock — size ' + sz + ' available (' + left + ' units)';
         label.style.color = '#2e7d32';
       }
-      /* Highlight size table row */
+      /* Highlight size table row + modal row */
       document.querySelectorAll('#size-table-body tr').forEach(function(r) {
         r.classList.toggle('highlight', r.cells[0] && r.cells[0].textContent == sz);
       });
+      highlightScRow(sz);
     });
   });
 
-  /* ── Size chart link opens accordion ── */
-  document.getElementById('size-chart-link').addEventListener('click', function(e) {
-    e.preventDefault();
-    var accItem = document.getElementById('acc-size');
-    var isOpen = accItem.classList.contains('open');
-    if (!isOpen) {
-      document.querySelectorAll('.acc-item').forEach(function(x) {
-        x.classList.remove('open');
-        x.querySelector('.acc-icon').textContent = '+';
-      });
-      accItem.classList.add('open');
-      accItem.querySelector('.acc-icon').textContent = '−';
-    }
-    accItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  /* ── Size Chart Modal ── */
+  var scOverlay = document.getElementById('sc-overlay');
+  var scUnit = 'in';
+
+  function openSizeChart() {
+    scOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    /* highlight currently selected size */
+    var activeSz = document.querySelector('.size-btn.active');
+    if (activeSz) highlightScRow(activeSz.dataset.size);
+  }
+  function closeSizeChart() {
+    scOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function highlightScRow(sz) {
+    document.querySelectorAll('#sc-tbody tr').forEach(function(r) {
+      r.classList.toggle('sc-active', r.dataset.size === sz);
+    });
+  }
+  function applyUnit(unit) {
+    scUnit = unit;
+    document.querySelectorAll('.sc-val').forEach(function(td) {
+      td.textContent = unit === 'cm' ? td.dataset.cm : td.dataset.in;
+    });
+    document.getElementById('btn-inch').classList.toggle('active', unit === 'in');
+    document.getElementById('btn-cm').classList.toggle('active', unit === 'cm');
+    /* update header labels */
+    var heads = document.querySelectorAll('.sc-table th');
+    var unit_label = unit === 'cm' ? ' (cm)' : ' (in)';
+    if (heads[1]) heads[1].textContent = 'Bust' + unit_label;
+    if (heads[2]) heads[2].textContent = 'Waist' + unit_label;
+    if (heads[3]) heads[3].textContent = 'Hip' + unit_label;
+    if (heads[4]) heads[4].textContent = 'Length' + unit_label;
+  }
+
+  document.getElementById('size-chart-link').addEventListener('click', function(e) { e.preventDefault(); openSizeChart(); });
+  document.getElementById('sc-close').addEventListener('click', closeSizeChart);
+  scOverlay.addEventListener('click', function(e) { if (e.target === scOverlay) closeSizeChart(); });
+  document.getElementById('btn-inch').addEventListener('click', function() { applyUnit('in'); });
+  document.getElementById('btn-cm').addEventListener('click', function() { applyUnit('cm'); });
 
   /* ── Pincode checker ── */
   document.getElementById('pincode-btn').addEventListener('click', function() {
