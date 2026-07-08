@@ -517,7 +517,17 @@
   var couponDiscount = 0;
   var selectedPayment = 'upi';
   var selectedBank    = null;
-  var COUPONS = {FIRST10:{pct:10},SAVE20:{pct:20},VAMAS15:{pct:15}};
+
+  /* auto-restore coupon applied in cart */
+  (function(){
+    var saved = window.VamasCoupon.get();
+    if(saved){
+      couponDiscount = saved.pct;
+      var msg = document.getElementById('co-coupon-msg');
+      msg.className = 'co-coupon-msg ok';
+      msg.textContent = '&#10003; '+saved.code+' applied — '+saved.pct+'% off';
+    }
+  })();
 
   function fmt(n){ return 'Rs.' + n.toLocaleString('en-IN'); }
   function priceParse(p){ return typeof p==='number' ? p : parseInt(String(p).replace(/[^\d]/g,''))||0; }
@@ -685,19 +695,23 @@
     selectedBank = el.textContent.trim();
   };
 
-  /* ── Coupon in checkout ── */
+  /* ── Coupon in checkout (uses shared VamasCoupon) ── */
   window.coApplyCoupon = function(){
     var code = document.getElementById('co-coupon-input').value.trim().toUpperCase();
     var msg  = document.getElementById('co-coupon-msg');
-    if(COUPONS[code]){
-      couponDiscount = COUPONS[code].pct;
+    if(!code){ msg.className='co-coupon-msg err'; msg.textContent='Please enter a coupon code.'; return; }
+    var items    = loadOrderItems();
+    var subtotal = items.reduce(function(s,i){ return s+(typeof i.price==='number'?i.price:parseInt(String(i.price).replace(/[^\d]/g,''))||0)*i.qty; },0);
+    var result   = window.VamasCoupon.apply(code, subtotal);
+    if(result.ok){
+      couponDiscount = result.pct;
       msg.className='co-coupon-msg ok';
-      msg.textContent='✓ Coupon applied! '+couponDiscount+'% off';
+      msg.textContent='&#10003; '+code+' applied — '+result.pct+'% off!';
       document.getElementById('co-coupon-input').value = '';
     } else {
       couponDiscount = 0;
       msg.className='co-coupon-msg err';
-      msg.textContent='✗ Invalid code. Try FIRST10, SAVE20 or VAMAS15.';
+      msg.textContent='&#10007; '+result.msg;
     }
     refreshTotals(loadOrderItems());
   };
@@ -762,6 +776,36 @@
           +'<div class="confirm-item-price">'+fmt(priceParse(item.price)*item.qty)+'</div>';
         cl.appendChild(el);
       });
+
+      /* Save order to VamasOrders for admin dashboard */
+      var subtotal  = items.reduce(function(s,i){ return s+priceParse(i.price)*i.qty; },0);
+      var mrp       = items.reduce(function(s,i){ return s+priceParse(i.origPrice||i.price)*i.qty; },0);
+      var couponAmt = couponDiscount>0 ? Math.round(subtotal*couponDiscount/100) : 0;
+      var codCharge = selectedPayment==='cod' ? 40 : 0;
+      var delivery  = (subtotal-couponAmt)>=FREE_THRESHOLD ? 0 : 79;
+      var orderTotal= subtotal - couponAmt + delivery + codCharge;
+      var appliedCoupon = window.VamasCoupon.get();
+      window.VamasOrders.save({
+        id:       orderId,
+        date:     new Date().toISOString(),
+        customer: document.getElementById('f-name').value.trim(),
+        phone:    document.getElementById('f-phone').value.trim(),
+        city:     document.getElementById('f-city').value.trim()+', '+document.getElementById('f-state').value,
+        address:  document.getElementById('f-addr').value.trim(),
+        pincode:  document.getElementById('f-pin').value.trim(),
+        items:    items,
+        subtotal: subtotal,
+        discount: mrp-subtotal,
+        coupon:   appliedCoupon ? appliedCoupon.code : null,
+        couponAmt:couponAmt,
+        delivery: delivery,
+        codCharge:codCharge,
+        total:    orderTotal,
+        payment:  selectedPayment.toUpperCase(),
+        status:   'confirmed'
+      });
+      if(appliedCoupon) window.VamasCoupon.use(appliedCoupon.code);
+      window.VamasCoupon.remove();
 
       /* Clear cart if not buynow */
       var isBuyNow = window.location.search.indexOf('buynow=1') > -1;

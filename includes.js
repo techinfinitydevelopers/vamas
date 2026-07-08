@@ -33,6 +33,56 @@
   })();
 
   /* ============================================================
+     VAMAS COUPON — single source of truth, admin-manageable
+     ============================================================ */
+  window.VamasCoupon = (function(){
+    var APPLIED_KEY = 'vamas_coupon_applied';
+    var DB_KEY      = 'vamas_coupons_db';
+    var DEFAULT = {
+      'FIRST10': {pct:10, desc:'10% off first order',     minOrder:0,   maxUses:500, uses:0, active:true},
+      'SAVE20':  {pct:20, desc:'20% off (min Rs.999)',    minOrder:999, maxUses:100, uses:0, active:true},
+      'VAMAS15': {pct:15, desc:'15% off for members',     minOrder:500, maxUses:200, uses:0, active:true},
+      'BRIDAL10':{pct:10, desc:'10% off bridal orders',   minOrder:0,   maxUses:50,  uses:0, active:false}
+    };
+    function getDB(){ try{ var d=JSON.parse(localStorage.getItem(DB_KEY)); if(!d){ d=DEFAULT; localStorage.setItem(DB_KEY,JSON.stringify(d)); } return d; }catch(e){ return DEFAULT; } }
+    function saveDB(db){ try{ localStorage.setItem(DB_KEY,JSON.stringify(db)); }catch(e){} }
+    return {
+      getAll:   getDB,
+      validate: function(code, subtotal){
+        var db=getDB(), c=db[code.toUpperCase()];
+        if(!c||!c.active)            return {ok:false, msg:'Invalid coupon code.'};
+        if(c.minOrder&&(subtotal||0)<c.minOrder) return {ok:false, msg:'Min order Rs.'+c.minOrder+' required.'};
+        if(c.maxUses&&c.uses>=c.maxUses)         return {ok:false, msg:'Coupon usage limit reached.'};
+        return {ok:true, pct:c.pct, desc:c.desc, code:code.toUpperCase()};
+      },
+      apply: function(code, subtotal){
+        var r=this.validate(code, subtotal);
+        if(r.ok){ try{ localStorage.setItem(APPLIED_KEY,JSON.stringify({code:r.code,pct:r.pct,desc:r.desc})); }catch(e){} document.dispatchEvent(new CustomEvent('vamas:couponApplied',{detail:r})); }
+        return r;
+      },
+      remove: function(){ try{ localStorage.removeItem(APPLIED_KEY); }catch(e){} document.dispatchEvent(new CustomEvent('vamas:couponRemoved')); },
+      get:    function(){ try{ return JSON.parse(localStorage.getItem(APPLIED_KEY)); }catch(e){ return null; } },
+      use:    function(code){ var db=getDB(); if(db[code]){ db[code].uses=(db[code].uses||0)+1; saveDB(db); } },
+      add:    function(code,data){ var db=getDB(); db[code.toUpperCase()]=data; saveDB(db); },
+      del:    function(code){ var db=getDB(); delete db[code.toUpperCase()]; saveDB(db); },
+      toggle: function(code){ var db=getDB(); if(db[code]){ db[code].active=!db[code].active; saveDB(db); } }
+    };
+  })();
+
+  /* ============================================================
+     VAMAS ORDERS — save/read orders, used by admin dashboard
+     ============================================================ */
+  window.VamasOrders = (function(){
+    var KEY = 'vamas_orders_db';
+    function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||[]; }catch(e){ return []; } }
+    return {
+      get: load,
+      save: function(order){ var o=load(); o.unshift(order); try{ localStorage.setItem(KEY,JSON.stringify(o.slice(0,500))); }catch(e){} },
+      updateStatus: function(id,status){ var o=load(); for(var i=0;i<o.length;i++){ if(o[i].id===id){ o[i].status=status; break; } } try{ localStorage.setItem(KEY,JSON.stringify(o)); }catch(e){} }
+    };
+  })();
+
+  /* ============================================================
      SHARED NAV + FOOTER — edit here, reflects on all pages
      ============================================================ */
 

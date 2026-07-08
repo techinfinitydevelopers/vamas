@@ -274,11 +274,11 @@
   var removedSnapshot = null;
   var undoTimer = null;
 
-  var COUPONS = {
-    'FIRST10': {pct:10, label:'10% off applied'},
-    'SAVE20':  {pct:20, label:'20% off applied'},
-    'VAMAS15': {pct:15, label:'15% off applied'}
-  };
+  /* restore previously applied coupon (e.g. from a previous visit) */
+  (function(){
+    var saved = window.VamasCoupon.get();
+    if(saved){ couponDiscount = saved.pct; }
+  })();
 
   function fmt(n){ return 'Rs.' + n.toLocaleString('en-IN'); }
   function priceParse(p){ return typeof p==='number' ? p : parseInt(String(p).replace(/[^\d]/g,''))||0; }
@@ -448,21 +448,41 @@
     }
   }
 
-  /* ── Coupon ── */
+  /* ── Coupon (uses shared VamasCoupon) ── */
+  function getCouponSubtotal(){
+    return window.VamasCart.get().reduce(function(s,i){ return s+((typeof i.price==='number'?i.price:parseInt(String(i.price).replace(/[^\d]/g,''))||0)*i.qty); },0);
+  }
+
+  function restoreCouponUI(){
+    var saved = window.VamasCoupon.get();
+    if(saved){
+      couponDiscount = saved.pct;
+      document.getElementById('applied-tag').textContent = saved.code+' — '+saved.pct+'% off';
+      document.getElementById('applied-coupon').classList.add('show');
+      document.getElementById('coupon-apply-btn').disabled = true;
+      var res = document.getElementById('coupon-result');
+      res.className='coupon-result ok';
+      res.textContent='&#10003; '+saved.code+' applied — '+saved.pct+'% off!';
+    }
+  }
+
   window.applyCoupon = function(){
     var code = document.getElementById('coupon-input').value.trim().toUpperCase();
     var res  = document.getElementById('coupon-result');
     if(!code){ res.className='coupon-result err'; res.textContent='Please enter a coupon code.'; return; }
-    if(COUPONS[code]){
-      couponDiscount = COUPONS[code].pct;
-      res.className='coupon-result ok'; res.textContent='&#10003; '+COUPONS[code].label+'!';
-      document.getElementById('applied-tag').textContent = code+' — '+couponDiscount+'% off';
+    var result = window.VamasCoupon.apply(code, getCouponSubtotal());
+    if(result.ok){
+      couponDiscount = result.pct;
+      res.className='coupon-result ok';
+      res.textContent='&#10003; '+code+' applied — '+result.pct+'% off!';
+      document.getElementById('applied-tag').textContent = code+' — '+result.pct+'% off';
       document.getElementById('applied-coupon').classList.add('show');
       document.getElementById('coupon-input').value = '';
       document.getElementById('coupon-apply-btn').disabled = true;
     } else {
       couponDiscount = 0;
-      res.className='coupon-result err'; res.textContent='&#10007; Invalid code. Try FIRST10, SAVE20 or VAMAS15.';
+      res.className='coupon-result err';
+      res.textContent='&#10007; '+result.msg;
       document.getElementById('applied-coupon').classList.remove('show');
     }
     refreshSummary();
@@ -471,6 +491,7 @@
 
   window.removeCoupon = function(){
     couponDiscount = 0;
+    window.VamasCoupon.remove();
     document.getElementById('applied-coupon').classList.remove('show');
     document.getElementById('coupon-result').className = 'coupon-result';
     document.getElementById('coupon-result').textContent = '';
@@ -490,6 +511,7 @@
   document.addEventListener('vamas:cartUpdated', function(){ renderItems(); });
 
   renderItems();
+  restoreCouponUI();
 
 })();
 </script>
