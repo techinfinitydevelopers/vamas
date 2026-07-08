@@ -480,64 +480,107 @@
 
     /* -- Responsive --- */
     @media (max-width: 768px) {
-      .nav-outer { padding: 8px 14px; }
-      .nav { padding: 6px 14px; border-radius: 50px; }
-      .nav-logo-img { height: 34px; }
-      .nav-links { display: none; }
-      .nav-contact { padding: 7px 14px; font-size: 9px; }
+      /* Slider */
+      .slide { height: auto; min-height: 400px; flex-direction: column-reverse; }
+      .slide-text { padding: 28px 20px 24px; max-width: 100%; position: relative; z-index: 3; }
+      .slide-h1 { font-size: 30px; }
+      .slide-p { font-size: 12px; display: none; }
+      .slide-btns { gap: 10px; }
+      .btn-p, .btn-o { padding: 12px 20px; font-size: 10px; }
+      .slide-img { position: relative; width: 100%; height: 220px; right: auto; top: auto; }
+      .slide-img::before { display: none; }
+      .slider-ctrl { bottom: 12px; }
+      .dot { width: 6px; height: 6px; }
+      .prev-btn, .next-btn { width: 36px; height: 36px; top: 110px; }
 
-      .slide { height: 480px; flex-direction: column; padding: 0; }
-      .slide-text { padding: 32px 20px; max-width: 100%; }
-      .slide-h1 { font-size: 34px; }
-      .slide-p { font-size: 12px; }
-      .slide-img { position: relative; width: 100%; height: 260px; right: auto; top: auto; }
-      .slide-img::before { width: 100%; height: 80px; background: linear-gradient(to bottom, var(--slide-bg,#420001), transparent); top: 0; bottom: auto; }
+      /* Trust bar */
+      .trust { flex-direction: column; padding: 0 16px; gap: 0; }
+      .trust-item { padding: 11px 0; border-bottom: 1px solid rgba(66,0,1,0.06); }
+      .trust-item:last-child { border-bottom: none; }
+      .trust-icon { width: 28px; height: 28px; }
 
-      .trust { padding: 0 20px; gap: 0; }
-      .trust-item { padding: 12px 0; }
+      /* Tags */
+      .tags { padding: 16px 16px; gap: 8px; justify-content: flex-start; overflow-x: auto; flex-wrap: wrap; }
+      .tag { font-size: 9px; padding: 6px 12px; white-space: nowrap; }
 
-      .full-banner { height: 380px; }
-      .full-banner-overlay { padding: 0 24px; }
-      .full-banner-title { font-size: 34px; }
-      .full-banner-sub { font-size: 12px; }
-      .full-banner-btn { padding: 11px 22px; }
+      /* Sections */
+      .sec { padding: 32px 16px; }
+      .sec-alt { padding: 32px 16px; }
+      .sec-hdr { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 20px; }
+      .sec-title { font-size: 22px; }
 
-      .sec { padding: 40px 20px; }
-      .sec-hdr { flex-direction: column; align-items: flex-start; gap: 10px; }
-      .sec-title { font-size: 24px; }
-
+      /* Category grid */
       .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .prod-img-wrap { height: 240px; }
+      .cat-card { aspect-ratio: 3/4; }
+      .cat-label { font-size: 12px; }
 
-      .brand-grid { grid-template-columns: 1fr; }
-      .brand-img { height: 260px; }
+      /* Full banner */
+      .full-banner { height: 300px; }
+      .full-banner-title { font-size: 26px; }
+      .full-banner-sub { display: none; }
+      .full-banner-btn { padding: 10px 18px; font-size: 9px; }
 
-      .test-grid { grid-template-columns: 1fr; }
+      /* Product grid */
+      .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .prod-img-wrap { height: 200px; }
+      .prod-body { padding: 10px 10px 12px; }
+      .prod-name { font-size: 12px; }
+      .prod-type { font-size: 10px; }
+      .price-row { flex-wrap: wrap; gap: 4px; }
+      .price { font-size: 14px; }
+      .orig { font-size: 10px; }
+      .disc { font-size: 9px; white-space: nowrap; }
+      .atc { padding: 9px; font-size: 9px; }
+      .stars { font-size: 10px; }
 
+      /* Brand section */
+      .brand-sec { flex-direction: column !important; gap: 0 !important; padding: 32px 16px !important; }
+      .brand-img { width: 100% !important; height: 240px !important; flex-shrink: unset !important; }
+      .brand-text { padding: 24px 0 0 !important; }
+      .brand-h2 { font-size: 24px; }
+      .brand-stats { gap: 20px; }
+      .stat-num { font-size: 28px; }
+
+      /* Reels / Instagram */
+      .reels-sec { padding: 32px 16px; }
       .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .reel-handle, .reel-stats { font-size: 9px; }
 
-      .dark-nl { padding: 40px 20px 32px; }
-      .dark-nl-h3 { font-size: 28px; }
-      .dark-nl-form { flex-direction: column; gap: 10px; }
-      .dark-nl-input { border-radius: 8px; width: 100%; }
-      .dark-nl-btn { border-radius: 8px; width: 100%; padding: 14px; }
+      /* Testimonials */
+      .test-grid { grid-template-columns: 1fr; gap: 12px; }
 
-      .dark-footer { padding: 32px 20px 24px; }
-      .dark-footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      /* Newsletter (gold) */
+      .nl { padding: 40px 16px; }
+      .nl-h3 { font-size: 26px; }
+      .nl-form { flex-direction: column; }
+      .nl-input { border-radius: 6px; }
+      .nl-btn { border-radius: 6px; padding: 13px; }
 
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      /* Dark footer */
+      .dark-nl { padding: 40px 16px 32px; }
+      .dark-nl-h3 { font-size: 26px; }
+      .dark-nl-form { flex-direction: column; gap: 10px; border-radius: 12px; padding: 12px; }
+      .dark-nl-input { border-radius: 8px; }
+      .dark-nl-btn { border-radius: 8px; padding: 13px; }
+      .dark-footer { padding: 28px 16px 20px; }
+      .dark-footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .dark-footer-bot { flex-direction: column; gap: 8px; text-align: center; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
-      .nav-outer { padding: 10px 24px; }
-      .nav-links a { font-size: 9px; gap: 16px; }
-      .slide { height: 560px; }
-      .slide-h1 { font-size: 44px; }
+      .slide { height: 540px; }
+      .slide-h1 { font-size: 42px; }
+      .slide-text { padding: 0 40px; }
       .sec { padding: 48px 40px; }
+      .sec-alt { padding: 48px 40px; }
+      .tags { padding: 16px 40px; }
       .cat-grid { grid-template-columns: repeat(3, 1fr); }
       .prod-grid { grid-template-columns: repeat(2, 1fr); }
+      .reels-sec { padding: 48px 40px; }
       .reels-grid { grid-template-columns: repeat(3, 1fr); }
+      .brand-sec { padding: 60px 40px !important; }
+      .dark-nl { padding: 56px 40px 48px; }
+      .dark-footer { padding: 40px 40px 28px; }
       .dark-footer-grid { grid-template-columns: 2fr 1fr 1fr; }
     }
   </style>
