@@ -1324,6 +1324,44 @@ function toggleMobFilter(){
 // Init: trigger pre-checked chips
 document.querySelectorAll('input[type=checkbox]:checked').forEach(cb=>toggleChip(cb));
 updatePrice();
+
+/* ── Add to Cart from collection cards ── */
+document.querySelectorAll('.p-add').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var card = this.closest('.p-card');
+    if (!card) return;
+    var imgEl    = card.querySelector('img');
+    var nameEl   = card.querySelector('.p-name');
+    var typeEl   = card.querySelector('.p-type');
+    var priceEl  = card.querySelector('.p-price');
+    var origEl   = card.querySelector('.p-orig');
+    var price    = priceEl ? parseInt(priceEl.textContent.replace(/[^\d]/g,'')) : 0;
+    var origPrice= origEl  ? parseInt(origEl.textContent.replace(/[^\d]/g,''))  : price;
+    window.VamasCart.add({
+      id:        (nameEl ? nameEl.textContent.trim().toLowerCase().replace(/\s+/g,'-') : 'product'),
+      name:      nameEl  ? nameEl.textContent.trim()  : 'Blouse',
+      type:      typeEl  ? typeEl.textContent.trim()  : '',
+      color:     'Default',
+      size:      '34',
+      price:     price,
+      origPrice: origPrice,
+      img:       imgEl   ? imgEl.src : ''
+    });
+    var self = this;
+    self.textContent = '✓ ADDED';
+    self.style.background = '#2e7d32';
+    self.style.color = '#fff';
+    self.style.borderColor = '#2e7d32';
+    setTimeout(function() {
+      self.textContent = 'ADD TO CART';
+      self.style.background = '';
+      self.style.color = '';
+      self.style.borderColor = '';
+    }, 1800);
+  });
+});
 </script>
 </body>
 </html>

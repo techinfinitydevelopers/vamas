@@ -1,6 +1,38 @@
 (function () {
 
   /* ============================================================
+     VAMAS CART UTILITY — localStorage-backed, shared across pages
+     ============================================================ */
+  window.VamasCart = (function(){
+    var KEY = 'vamas_cart_v1';
+    function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||[]; }catch(e){ return []; } }
+    function save(items){
+      try{ localStorage.setItem(KEY, JSON.stringify(items)); }catch(e){}
+      document.dispatchEvent(new CustomEvent('vamas:cartUpdated', {detail:{items:items}}));
+    }
+    function iKey(i){ return (i.id||'item')+'||'+(i.color||'')+'||'+(i.size||''); }
+    return {
+      get: load,
+      count: function(){ return load().reduce(function(s,i){ return s+i.qty; },0); },
+      add: function(item){
+        var items=load(), k=iKey(item), ex=null;
+        for(var j=0;j<items.length;j++){ if(items[j].key===k){ ex=items[j]; break; } }
+        if(ex){ ex.qty=Math.min(ex.qty+(item.qty||1),10); }
+        else{ item.key=k; item.qty=item.qty||1; items.push(item); }
+        save(items);
+        if(window.VamasCart.showToast) window.VamasCart.showToast(item);
+      },
+      update: function(key,qty){
+        var items=load();
+        for(var j=0;j<items.length;j++){ if(items[j].key===key){ items[j].qty=Math.max(1,Math.min(qty,10)); break; } }
+        save(items);
+      },
+      remove: function(key){ save(load().filter(function(x){ return x.key!==key; })); },
+      clear: function(){ save([]); }
+    };
+  })();
+
+  /* ============================================================
      SHARED NAV + FOOTER — edit here, reflects on all pages
      ============================================================ */
 
@@ -98,7 +130,7 @@
     + '<div class="nav-icons">'
     + '<a href="#" title="Search"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>'
     + '<a href="#" title="Wishlist"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></a>'
-    + '<a href="#" title="Cart" style="position:relative;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-badge">2</span></a>'
+    + '<a href="cart.html" id="nav-cart-link" title="Cart" style="position:relative;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-badge" id="nav-cart-badge" style="display:none;">0</span></a>'
     + '<a href="contact.html" class="nav-contact">Contact Us</a>'
     + '<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>'
     + '</div></div></nav>'
@@ -208,7 +240,16 @@
     '.wa-qr:hover{background:#e9fdf0;}',
     '#wa-cta{display:block;background:#25D366;color:#fff;text-align:center;padding:13px;font-size:12px;font-weight:700;letter-spacing:1px;text-decoration:none;transition:background .2s;font-family:"Poppins",sans-serif;}',
     '#wa-cta:hover{background:#1ebe5c;}',
-    '#wa-cta svg{width:16px;height:16px;vertical-align:middle;margin-right:6px;}'
+    '#wa-cta svg{width:16px;height:16px;vertical-align:middle;margin-right:6px;}',
+    /* ── Cart Added Toast ── */
+    '#vc-toast{position:fixed;bottom:90px;right:24px;width:284px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);z-index:8500;padding:14px 14px 14px 14px;display:flex;gap:12px;align-items:center;transform:translateX(320px);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.4,0,.2,1);}',
+    '#vc-toast.show{transform:translateX(0);opacity:1;pointer-events:all;}',
+    '#vc-toast-img{width:52px;height:62px;border-radius:6px;object-fit:cover;object-position:top;flex-shrink:0;border:1px solid rgba(66,0,1,.08);}',
+    '#vc-toast-label{font-size:9px;color:#2e7d32;font-weight:800;letter-spacing:1.5px;margin-bottom:3px;}',
+    '#vc-toast-name{font-size:12px;font-weight:700;color:#420001;margin-bottom:8px;line-height:1.3;}',
+    '#vc-toast-btn{background:#420001;color:#e7d1a6;border:none;border-radius:6px;padding:8px 0;font-size:11px;font-weight:700;cursor:pointer;width:100%;font-family:"Poppins",sans-serif;letter-spacing:.5px;transition:background .2s;}',
+    '#vc-toast-btn:hover{background:#6a0002;}',
+    '#vc-toast-close{position:absolute;top:8px;right:10px;background:none;border:none;font-size:18px;color:#ccc;cursor:pointer;line-height:1;padding:0;}'
   ].join('');
 
   var waStyle = document.createElement('style');
@@ -272,6 +313,54 @@
     document.addEventListener('DOMContentLoaded', initWA);
   } else {
     initWA();
+  }
+
+  /* ---------- CART BADGE + TOAST ---------- */
+  function updateCartBadge() {
+    var badge = document.getElementById('nav-cart-badge');
+    if (!badge) return;
+    var count = window.VamasCart ? window.VamasCart.count() : 0;
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'flex' : 'none';
+  }
+
+  function initCartUI() {
+    updateCartBadge();
+    document.addEventListener('vamas:cartUpdated', updateCartBadge);
+
+    /* inject toast */
+    var toastDiv = document.createElement('div');
+    toastDiv.innerHTML = '<div id="vc-toast">'
+      + '<img id="vc-toast-img" src="" alt="">'
+      + '<div style="flex:1;min-width:0;">'
+      + '<div id="vc-toast-label">&#10003; ADDED TO CART</div>'
+      + '<div id="vc-toast-name"></div>'
+      + '<button id="vc-toast-btn" onclick="window.location.href=\'cart.html\'">VIEW CART &rarr;</button>'
+      + '</div>'
+      + '<button id="vc-toast-close">&times;</button>'
+      + '</div>';
+    document.body.appendChild(toastDiv.firstChild);
+
+    document.getElementById('vc-toast-close').addEventListener('click', function() {
+      document.getElementById('vc-toast').classList.remove('show');
+    });
+
+    var _toastTimer;
+    window.VamasCart.showToast = function(item) {
+      var toast = document.getElementById('vc-toast');
+      if (!toast) return;
+      document.getElementById('vc-toast-img').src = item.img || 'assets/slide-pink.jpg';
+      document.getElementById('vc-toast-name').textContent = item.name || 'Item';
+      toast.classList.add('show');
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 3200);
+    };
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCartUI);
+  } else {
+    initCartUI();
   }
 
 })();

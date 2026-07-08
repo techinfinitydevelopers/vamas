@@ -868,12 +868,26 @@
 
   /* ── Add to Cart ── */
   function doATC(btn) {
-    btn.textContent = '✓ ADDED TO CART!';
-    btn.classList.add('added');
-    setTimeout(function() { btn.textContent = 'ADD TO CART'; btn.classList.remove('added'); }, 1800);
+    var activeSwatch = document.querySelector('.swatch.active');
+    var activeSize   = document.querySelector('.size-btn.active');
+    window.VamasCart.add({
+      id:        'silk-zari-mirror-blouse',
+      name:      'Silk Zari Mirror Blouse',
+      type:      'Banarasi Silk · Mirror Work',
+      color:     activeSwatch ? activeSwatch.dataset.color : 'Maroon',
+      size:      activeSize   ? activeSize.dataset.size   : '34',
+      price:     1299,
+      origPrice: 1999,
+      img:       document.getElementById('main-img').src,
+      qty:       qty
+    });
+    var mainBtn = document.getElementById('atc-btn');
+    mainBtn.textContent = '✓ ADDED TO CART!';
+    mainBtn.classList.add('added');
+    setTimeout(function() { mainBtn.textContent = 'ADD TO CART'; mainBtn.classList.remove('added'); }, 1800);
   }
   document.getElementById('atc-btn').addEventListener('click', function() { doATC(this); });
-  document.getElementById('sticky-atc-btn').addEventListener('click', function() { doATC(document.getElementById('atc-btn')); });
+  document.getElementById('sticky-atc-btn').addEventListener('click', function() { doATC(this); });
 
   /* ── Wishlist ── */
   var wished = false;
