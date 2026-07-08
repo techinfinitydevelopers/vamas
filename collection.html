@@ -635,7 +635,8 @@ input[type=range]{
   .col-hero-right { display: none; }
 
   .col-body { flex-direction: column; padding: 20px 16px 40px; }
-  .sidebar { width: 100%; min-width: unset; position: static; margin-right: 0; margin-bottom: 20px; }
+  .sidebar { display: none; width: 100%; min-width: unset; position: static; margin-right: 0; margin-bottom: 16px; border-radius: 10px; border: 1px solid rgba(66,0,1,0.1); padding: 16px; background: #fff; }
+  .sidebar.mob-open { display: block; }
   .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .p-img-wrap { height: 200px; }
 
@@ -1311,17 +1312,13 @@ document.querySelectorAll('.page-btn:not(.disabled)').forEach(btn=>{
 
 // Mobile filter toggle
 function toggleMobFilter(){
+  if(window.innerWidth > 768) return;
   const sb = document.getElementById('sidebar');
-  if(window.innerWidth <= 768){
-    sb.style.display = sb.style.display === 'block' ? 'none' : 'block';
-    if(sb.style.display === 'block'){
-      sb.style.position = 'static';
-      sb.style.width = '100%';
-      sb.style.minWidth = '0';
-      sb.style.marginBottom = '20px';
-      sb.style.marginRight = '0';
-    }
-  }
+  const btn = document.querySelector('.mob-filter-btn');
+  const isOpen = sb.classList.toggle('mob-open');
+  if(btn) btn.innerHTML = isOpen
+    ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Close Filters'
+    : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/></svg> Filters';
 }
 
 // Init: trigger pre-checked chips
